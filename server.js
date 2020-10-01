@@ -65,6 +65,8 @@ db.on("disconnected", () => console.log("mongo disconnected"));
 // =======================================
 const chatController = require("./controllers/chat_controller.js");
 app.use("/chisme", chatController);
+const postController = require("./controllers/post_controller.js");
+app.use("/posts", postController);
 const userController = require("./controllers/user_controller.js");
 app.use("/user", userController);
 // =======================================
