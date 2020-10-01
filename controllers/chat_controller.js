@@ -28,9 +28,7 @@ const User = require("../models/user");
 POST ROUTE
 ============= */
 //CREATE CHAT
-chat.post("/", (req, res) => {
-  User.find({});
-});
+chat.post("/", (req, res) => {});
 /* ===========
 GET ROUTE
 ============= */
