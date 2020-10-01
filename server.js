@@ -63,7 +63,8 @@ db.on("disconnected", () => console.log("mongo disconnected"));
 // =======================================
 //          CONTROLLERS
 // =======================================
-
+const chatController = require("./controllers/chat_controller.js");
+app.use("/chisme", chatController);
 // =======================================
 //              ROUTES
 // =======================================
