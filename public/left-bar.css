@@ -1,0 +1,9 @@
+
+
+
+.left-main-bar{
+    height: 100vh;
+    width: 220px;
+    background-color: rgb(66, 136, 136);
+    position: sticky;
+}
