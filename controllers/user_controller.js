@@ -1,6 +1,6 @@
 // =======================================
 //
-//          CHAT CONTROLLER
+//          USER CONTROLLER
 //
 // =======================================
 
@@ -8,7 +8,7 @@
 //       DEPENDENCIES
 // =========================
 const express = require("express");
-const chat = express.Router();
+const user = express.Router();
 const Chat = require("../models/chat");
 const Comment = require("../models/comment");
 const User = require("../models/user");
@@ -27,28 +27,36 @@ const User = require("../models/user");
 /* ===========
 POST ROUTE
 ============= */
-//CREATE CHAT
-chat.post("/", (req, res) => {
-  User.find({});
+//CREATE USER
+user.post("/", (req, res) => {
+  User.create(req.body, (err, createdUser) => {
+    console.log(
+      `This is the user you just created ==================================${createdUser}================================================`
+    );
+    User.find({}, (err, foundUsers) => {
+      res.json(foundUsers);
+    });
+  });
 });
+
 /* ===========
 GET ROUTE
 ============= */
-//INDEX CHAT
-chat.get("/", (req, res) => {
-  Chat.find({}, (err, foundChats) => {
-    res.json(foundChats);
+//INDEX USER
+user.get("/", (req, res) => {
+  User.find({}, (err, foundUsers) => {
+    res.json(foundUsers);
   });
 });
 
 /* ===========
 PUT ROUTE
 ============= */
-//UPDATE CHAT
+//UPDATE USER
 
 /* ===========
 DELETE ROUTE
 ============= */
-//DELETE CHAT
+//DELETE USER
 
-module.exports = chat;
+module.exports = user;

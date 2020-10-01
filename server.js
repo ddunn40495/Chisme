@@ -65,12 +65,12 @@ db.on("disconnected", () => console.log("mongo disconnected"));
 // =======================================
 const chatController = require("./controllers/chat_controller.js");
 app.use("/chisme", chatController);
+const userController = require("./controllers/user_controller.js");
+app.use("/user", userController);
 // =======================================
 //              ROUTES
 // =======================================
-app.get("/route", (req, res) => {
-  res.send("route is working");
-});
+
 // =======================================
 //              LISTENER
 // =======================================
