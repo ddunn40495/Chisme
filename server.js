@@ -5,6 +5,11 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 const cors = require("cors");
+
+
+//testing socket io
+var http = require('http').createServer(app);
+var io = require('socket.io')(http);
 // =======================================
 //              MIDDLEWARE
 // =======================================
@@ -70,10 +75,21 @@ app.use("/user", userController);
 // =======================================
 //              ROUTES
 // =======================================
-
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/public/index.html');
+});
 // =======================================
 //              LISTENER
 // =======================================
+
+io.on('connection', (socket) => {
+  console.log('a user connected');
+});
+
+http.listen(3000, () => {
+  console.log('io listening on *:3000');
+});
+
 app.listen(port, () => {
   console.log(`listening on port: ${port}`);
 });
