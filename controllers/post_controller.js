@@ -107,6 +107,28 @@ posts.put("/:postId", (req, res) => {
 });
 
 /* ===========
+PUT ROUTE
+============= */
+//UPDATE COMMENT
+posts.put("/:postId/comment/:commentId", (req, res) => {
+  Comment.findByIdAndUpdate(
+    req.params.commentId,
+    req.body,
+    { new: true },
+    (error, updatedComment) => {
+      console.log(
+        `This is the post you just updated ==================================${updatedComment}================================================`
+      );
+      if (error) {
+        res.send(error);
+      } else {
+        res.redirect("/posts");
+      }
+    }
+  );
+});
+
+/* ===========
 DELETE ROUTE
 ============= */
 //DELETE COMMENT
