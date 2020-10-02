@@ -29,16 +29,16 @@ const Post = require("../models/post");
   POST ROUTE
   ============= */
 //CREATE COMMENT
-comments.post("/:id", (req, res) => {
-  Post.findById(req.params.id, (err, foundPost) => {
-    Comment.create(req.body, (err, createdComment) => {
-      foundPost.comments.push(createdComment);
-      foundPost.save((err, data) => {
-        res.json(data);
-      });
-    });
-  });
-});
+// comments.post("/:id", (req, res) => {
+//   Post.findById(req.params.id, (err, foundPost) => {
+//     Comment.create(req.body, (err, createdComment) => {
+//       foundPost.comments.push(createdComment);
+//       foundPost.save((err, data) => {
+//         res.json(data);
+//       });
+//     });
+//   });
+// });
 
 comments.get("");
 module.exports = comments;
