@@ -8,8 +8,8 @@ const cors = require("cors");
 
 
 //testing socket io
-var http = require('http').createServer(app);
-var io = require('socket.io')(http);
+// var http = require('http').createServer(app);
+// var io = require('socket.io')(http);
 // =======================================
 //              MIDDLEWARE
 // =======================================
@@ -82,6 +82,18 @@ app.get('/', (req, res) => {
 //              LISTENER
 // =======================================
 
+
+
+// http.listen(port, () => {
+//   console.log('io listening on *:3000');
+// });
+
+const server = app.listen(port, () => {
+  console.log(`listening on port: ${port}`);
+});
+
+io = require("socket.io")(server)
+
 io.on('connection', (socket) => {
   console.log('a user connected');
   socket.on('test', (msg) => {
@@ -91,12 +103,4 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
-});
-
-http.listen(3000, () => {
-  console.log('io listening on *:3000');
-});
-
-app.listen(port, () => {
-  console.log(`listening on port: ${port}`);
 });
