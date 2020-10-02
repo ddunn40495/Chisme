@@ -1,7 +1,7 @@
 class App extends React.Component {
   state = {};
   logRed = () => {
-    console.log("red");
+    console.log("it  is red");
   };
   render = () => {
     return <h3 onClick={this.logRed}>red</h3>;

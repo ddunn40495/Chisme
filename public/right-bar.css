@@ -1,0 +1,11 @@
+
+
+.right-main-bar{
+    position: sticky;
+    background-color: rgb(82, 89, 131);
+    width: 200px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    height: 100vh;
+}
