@@ -40,5 +40,13 @@ const Post = require("../models/post");
 //   });
 // });
 
-comments.get("");
+/* ===========
+  DELETE ROUTE
+  ============= */
+// comments.delete('/:commentId/:postID', (req, res) => {
+//   Comment.findByIdAndRemove(req.params.commentId, (err, deletedComment) => {
+//     Post.findOne({})
+//   })
+// })
+
 module.exports = comments;
