@@ -28,19 +28,79 @@ class RightBar extends React.Component {
 }
 
 
+class Comments extends React.Component {
+
+    render = () => {
+        return <form className="new-comment-form" onSubmit={this.props.submitComment} id={this.props.postId}>
+            {/* INPUT FOR THE COMMENT */}
+            <textarea
+                className="comment-textarea"
+                id="text"
+                placeholder="write a comment"
+                onChange={this.props.onChangeComment}></textarea>
+            {/* SUBMIT BUTTON TO CREATE A NEW POST*/}
+            <input type="submit" value="Send" />
+        </form>
+    }
+}
+
+
+
+
 // THIS WILL BE A CLASS TO RENDER ALL THE POSTS
 // STORED IN THE POSTS ARRAY
 
 class AllPosts extends React.Component {
 
 
+
     render = () => {
         return <div className="all-posts-container">
-            <ul className="list-posts">
+            <ul className="list-posts ">
                 {this.props.postList.map((post) => {
                     return <li className="single-post" key={post._id}>
                         <h6 className="post-subject">subject: {post.subject}</h6>
                         <p className="post-body">body: {post.body}</p>
+                        <details className="menu-delete-edit">
+                            <summary></summary>
+                            <button onClick={this.props.deleteAPost} id={post._id}>Delete Post</button>
+                            <details>
+                                <summary>Edit Post</summary>
+                                {/* FORM TO EDIT A POST */}
+                                <form className="edit-post-form" onSubmit={this.props.editAPost} id={post._id}>
+                                    {/* INPUT FOR THE SUBJECT */}
+                                    <input
+                                        type="text"
+                                        id="subject"
+                                        defaultValue={post.subject}
+                                        onChange={this.props.handle} />
+                                    {/* INPUT FOR THE BODY */}
+                                    <textarea
+                                        id="body"
+                                        defaultValue={post.body}
+                                        onChange={this.props.handle}></textarea>
+                                    {/* SUBMIT BUTTON TO CREATE A NEW POST*/}
+                                    <input type="submit" value="Edit Post" />
+                                </form>
+                            </details>
+                        </details>
+
+                        <ul className="list-of-comments">
+                            <Comments
+                                onChangeComment={this.props.handleCommentChange}
+                                submitComment={this.props.submitNComment}
+                                postId={post._id}
+                            />
+                            {
+                                post.comments.map((comment) => {
+                                    return <li key={comment._id}
+                                        className="single-comment">
+                                        {comment.text}
+                                    </li>
+                                }
+                                )
+                            }
+                        </ul>
                     </li>
                 }
                 )}
@@ -50,6 +110,10 @@ class AllPosts extends React.Component {
 
 }
 
+document.addEventListener('DOMContentLoaded', function () {
+    var elems = document.querySelectorAll('.collapsible');
+    var instances = M.Collapsible.init(elems, options);
+});
 
 
 // ====== THIS FORM IS TO CREATE A NEW POST====
@@ -60,7 +124,7 @@ class PostForm extends React.Component {
     //AND ADDING AN ARRAY TAHT WILL STORE ALL THE
     //POSTS
     state = {
-        user: "5f762749417ba037396912b0",
+        user: "",
         subject: "",
         body: "",
         comments: [],
@@ -99,7 +163,7 @@ class PostForm extends React.Component {
     }
 
 
-    //THIS IS A FUNCTION THAT WILL PUPULATE
+    //THIS IS A FUNCTION THAT WILL POPULATE
     // THE KEY WITH A VALUE
     // THE KEY HAS TO MATCH THE PROPERTIES IN
     // STATE SO IT CAN BE SAVED ONCE THE USER
@@ -109,6 +173,55 @@ class PostForm extends React.Component {
             [event.target.id]: event.target.value
         })
     }
+
+    // THIS IS A FUNCTION THAT WILL DELETE A SINGLE POST
+    // BY TARGETING ITS ID AND THEN WILL GET THE 
+    // NEW DATA BACK TO RE-POPULATE THE LIST OF POSTS
+    // AND RENDER IT
+    deletePost = (event) => {
+        const id = event.target.id;
+        axios.delete("/posts/" + id).then(
+            (response) => {
+                this.setState({
+                    posts: response.data
+                })
+            }
+        )
+    }
+
+    // THIS IS A FUNCTION THAT WILL EDIT A SINGLE POST
+    // BY TARGETING ITS ID AND WILL GET THE NEW DATA
+    // BACK TO RE-POPULATE THE LIST OF POSTS AND RENDER IT
+    editPost = (event) => {
+        event.preventDefault();
+        const id = event.target.id;
+        console.log(this.state)
+        axios.put(`/posts/${id}`, this.state).then(
+            (response) => {
+                this.setState({
+                    posts: response.data,
+                })
+            }
+        )
+    }
+
+
+    // A FUNCTION THAT WILL CREATE A NEW COMMENT
+    SubmitComment = (event) => {
+        event.preventDefault();
+        event.currentTarget.reset();
+        const id = event.target.id;
+        axios.post("/posts/" + id + "/comment", this.state).then(
+            (response) => {
+                this.setState({
+                    posts: response.data,
+                })
+            }
+        )
+    }
+
+
+
 
     // CREATING THE FORM TO BE RENDERED IN THE INDEX
     // AND ADDING THE FUNCTIONS ABOVE
@@ -132,6 +245,11 @@ class PostForm extends React.Component {
 
             <AllPosts
                 postList={this.state.posts}
+                deleteAPost={this.deletePost}
+                handle={this.handleChange}
+                editAPost={this.editPost}
+                submitNComment={this.SubmitComment}
+                handleCommentChange={this.handleChange}
             />
 
         </div>
@@ -140,6 +258,7 @@ class PostForm extends React.Component {
 }
 
 // ======== CONTAINS ALL THE OTHER CLASSES IN A SIGLE MAIN CLASS==
+// this is what gets send to the ReactDOM.render();
 class App extends React.Component {
     render = () => {
         return <div className="main-body">

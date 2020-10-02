@@ -51,7 +51,7 @@ posts.post("/:postId/comment", (req, res) => {
     Comment.create(req.body, (err, createdComment) => {
       foundPost.comments.push(createdComment);
       foundPost.save((err, data) => {
-        res.json(data);
+        res.redirect("/posts");
       });
     });
   });
@@ -118,6 +118,7 @@ posts.delete("/:postId", (req, res) => {
     Post.find({}, (err, foundPosts) => {
       res.json(foundPosts);
     });
+    // res.redirect('/posts');
   });
 });
 
