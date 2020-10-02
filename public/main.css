@@ -1,6 +1,4 @@
 
-
-
 #root{
   margin: 0;
   padding: 0;
@@ -8,30 +6,62 @@
 .main-body{
   position: absolute;
   width: 100vw;
+  height: 100vh;
   top: 0;
-  background-color: rgb(153, 147, 140);
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgb(173, 13, 13);
   display: flex;
-}
-
-h3 {
-  color: red;
+  justify-content: space-between;
 }
 
 .middle-bar{
+  background-color: rgb(39, 177, 108);
   flex-grow: 1;
-  text-align: center;
-  padding: 15px;
+  overflow: auto;
+  padding: 20px;
 }
 
+
 .add-new-post{
-  background-color: black;
-  min-height: 200px;
+  background-color: rgb(41, 117, 168);
+  padding: 12px;
+  margin: 0 auto;
+}
+
+.new-post-form {
+  background-color: rgb(233, 233, 233);
+  padding: 12px;
+}
+.new-post-form input{
   padding: 12px;
 }
 
-form {
-  background-color: white;
+.new-post-form textarea{
+  height: 100px;
+  padding: 12px;
+  resize: none;
+  outline: none;
+  transition-duration: .3s;
+  transition-timing-function: ease-out;
 }
-body{
-  background-color: rgb(70,70,70);
+.new-post-form textarea:focus{
+  border: 2px solid rgb(0, 158, 119);
+}
+
+
+/* ADDING CHANGES TO EACH CREATED POST AND BODY */
+
+/* this will render the post for most recent */
+.list-posts{
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.single-post{
+  min-height: 150px;
+  background-color: burlywood;
+  padding: 12px;
+  margin-bottom: 12px;
 }
