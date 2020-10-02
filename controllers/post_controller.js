@@ -8,12 +8,14 @@
 //       DEPENDENCIES
 // =========================
 const express = require("express");
+const async = require("async");
 const posts = express.Router();
 const Chat = require("../models/chat");
 const Comment = require("../models/comment");
 const User = require("../models/user");
 const Post = require("../models/post");
 const comments = require("./comment_controller");
+const { post } = require("./comment_controller");
 // const isAuthenticated = (req, res, next) => {
 //     if (req.session.currentUser) {
 //       return next()
@@ -31,14 +33,12 @@ POST ROUTE
 ============= */
 //CREATE POST
 posts.post("/", (req, res) => {
-  console.log(req.body);
   Post.create(req.body, (err, createdPost) => {
     console.log(
       `This is the post you just created ==================================${createdPost}================================================`
     );
-    Post.find({}, (err, foundPosts) => {
-      res.json(foundPosts);
-    });
+
+    res.redirect("/posts");
   });
 });
 
@@ -56,6 +56,7 @@ posts.post("/:postId/comment", (req, res) => {
     });
   });
 });
+
 /* ===========
 GET ROUTE
 ============= */
@@ -73,6 +74,7 @@ GET ROUTE
 //INDEX POST
 posts.get("/", (req, res) => {
   Post.find({})
+    .sort({ createdAt: 1 })
     .populate("comments")
     .exec((err, posts) => {
       if (err) {
@@ -98,9 +100,29 @@ posts.put("/:postId", (req, res) => {
       if (error) {
         res.send(error);
       } else {
-        Post.find({}, (err, foundPosts) => {
-          res.json(foundPosts);
-        });
+        res.redirect("/posts");
+      }
+    }
+  );
+});
+
+/* ===========
+PUT ROUTE
+============= */
+//UPDATE COMMENT
+posts.put("/:postId/comment/:commentId", (req, res) => {
+  Comment.findByIdAndUpdate(
+    req.params.commentId,
+    req.body,
+    { new: true },
+    (error, updatedComment) => {
+      console.log(
+        `This is the post you just updated ==================================${updatedComment}================================================`
+      );
+      if (error) {
+        res.send(error);
+      } else {
+        res.redirect("/posts");
       }
     }
   );
@@ -109,17 +131,96 @@ posts.put("/:postId", (req, res) => {
 /* ===========
 DELETE ROUTE
 ============= */
+//DELETE COMMENT
+
+posts.delete("/:postId/comment/:commentId", (req, res) => {
+  Comment.findByIdAndRemove(req.params.commentId).then((err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(
+        `This is the comment you just deleted ==================================${data}================================================`
+      );
+    }
+
+    res.redirect("/posts");
+  });
+});
+
+/* ===========
+DELETE ROUTE
+============= */
 //DELETE POST
-posts.delete("/:postId", (req, res) => {
-  Post.findByIdAndRemove(req.params.postId, (err, deletedPost) => {
-    console.log(
-      `This is the request you just deleted ==================================${deletedPost}================================================`
-    );
-    Post.find({}, (err, foundPosts) => {
-      res.json(foundPosts);
-    });
-    // res.redirect('/posts');
+
+posts.delete("/:postId", async (req, res) => {
+  await Post.findByIdAndRemove(req.params.postId).then((err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(
+        `This is the post you just deleted ==================================${data}================================================`
+      );
+    }
+
+    res.redirect("/posts");
   });
 });
 
 module.exports = posts;
+
+///graveyard
+
+//delete routes for post
+
+// posts.delete("/:postId", (req, res) => {
+//   Post.findByIdAndRemove(req.params.postId, (err, deletedPost) => {
+//     console.log(
+//       `This is the request you just deleted ==================================${deletedPost}================================================`
+//     );
+//     Post.find({})
+//       .populate("comments")
+//       .exec((err, posts) => {
+//         if (err) {
+//           console.log(err);
+//         }
+//         res.json(posts);
+//       });
+//   });
+// });
+
+// posts.delete("/:postId", (req, res) => {
+//   Post.findByIdAndRemove(req.params.postId)
+//     .then((err, deletedPost) => {
+//       console.log(
+//         `This is the request you just deleted ==================================${deletedPost}================================================`
+//       );
+//     })
+//     .then(() => {
+//       Post.find({})
+//         .populate("comments")
+//         .exec((err, posts) => {
+//           if (err) {
+//             console.log(err);
+//           }
+//           res.json(posts);
+//         });
+//     });
+// });
+
+// put routes for comments
+// post.put("/:postId/comment/:commentId", (req, res) => {
+//   async.waterfall([findComment, findPost, sendPost], (err, data) => {});
+//   const findComment = () => {
+//     const comment = await Comment.findByIdAndUpdate(req.params.comment.Id, req.body, {
+//       new: true,
+//     });
+//     return comment
+//   };
+//   const findPost = () => {
+//     const post = await Post.findById(req.params.postId, (err, foundPost))
+//     return post
+//   };
+//   const sendPost = () => {
+
+//   }
+// });
