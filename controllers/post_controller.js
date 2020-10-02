@@ -13,6 +13,7 @@ const Chat = require("../models/chat");
 const Comment = require("../models/comment");
 const User = require("../models/user");
 const Post = require("../models/post");
+const comments = require("./comment_controller");
 // const isAuthenticated = (req, res, next) => {
 //     if (req.session.currentUser) {
 //       return next()
@@ -45,8 +46,8 @@ posts.post("/", (req, res) => {
 POST ROUTE
 ============= */
 //CREATE COMMENT
-posts.post("/:id/comment", (req, res) => {
-  Post.findById(req.params.id, (err, foundPost) => {
+posts.post("/:postId/comment", (req, res) => {
+  Post.findById(req.params.postId, (err, foundPost) => {
     Comment.create(req.body, (err, createdComment) => {
       foundPost.comments.push(createdComment);
       foundPost.save((err, data) => {
@@ -60,8 +61,8 @@ GET ROUTE
 ============= */
 //SHOW POST
 
-posts.get("/:id", (req, res) => {
-  Post.findById(req.params.id, (err, foundPost) => {
+posts.get("/:postId", (req, res) => {
+  Post.findById(req.params.postId, (err, foundPost) => {
     res.json(foundPost);
   });
 });
@@ -71,18 +72,23 @@ GET ROUTE
 ============= */
 //INDEX POST
 posts.get("/", (req, res) => {
-  Post.find({}, (err, foundPosts) => {
-    res.json(foundPosts);
-  });
+  Post.find({})
+    .populate("comments")
+    .exec((err, posts) => {
+      if (err) {
+        console.log(err);
+      }
+      res.json(posts);
+    });
 });
 
 /* ===========
 PUT ROUTE
 ============= */
 //UPDATE POST
-posts.put("/:id", (req, res) => {
+posts.put("/:postId", (req, res) => {
   Post.findByIdAndUpdate(
-    req.params.id,
+    req.params.postId,
     req.body,
     { new: true },
     (error, updatedPost) => {
@@ -104,8 +110,8 @@ posts.put("/:id", (req, res) => {
 DELETE ROUTE
 ============= */
 //DELETE POST
-posts.delete("/:id", (req, res) => {
-  Post.findByIdAndRemove(req.params.id, (err, deletedPost) => {
+posts.delete("/:postId", (req, res) => {
+  Post.findByIdAndRemove(req.params.postId, (err, deletedPost) => {
     console.log(
       `This is the request you just deleted ==================================${deletedPost}================================================`
     );
