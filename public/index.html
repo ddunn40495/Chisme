@@ -13,13 +13,9 @@
   </head>
   <title>Chisme</title>
   <body>
+    
     <div class="container" id="root"></div>
-    <div class="container" id="root2"></div>
-    <div id="messages"></div>
-    <form>
-      <input type="text" id="m">
-      <input type="submit">
-    </form>
+
     <script
       src="https://unpkg.com/react@16/umd/react.development.js"
       crossorigin
@@ -32,28 +28,28 @@
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
     <script type="text/babel" src="js/app.js"></script>
     <script type="text/babel" src="js/daniel.js"></script>
-    <script type="text/babel" src="js/edgar.js"></script>
     <script type="text/babel" src="js/johnny.js"></script>
+    <script type="text/babel" src="js/edgar.js"></script>
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script>
-      var socket = io();
+      // var socket = io();
     </script>
     <script>
       $(function () {
 
-        var socket = io();
-        $('form').submit(function(e) {
-          e.preventDefault(); // prevents page reloading
-          socket.emit('test', $('#m').val());
+        // var socket = io();
+        // $('form').submit(function(e) {
+        //   e.preventDefault(); // prevents page reloading
+        //   socket.emit('test', $('#m').val());
           
-          // $('#m').val('');
-          // return false;
-        });
-        socket.on('chatid', function(msg){
-          $('#messages').append($('<h1>').text(msg));
-        });
+        //   // $('#m').val('');
+        //   // return false;
+        // });
+        // socket.on('chatid', function(msg){
+        //   $('#messages').append($('<h1>').text(msg));
+        // });
 
       });
     </script>
