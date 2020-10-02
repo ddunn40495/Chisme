@@ -33,6 +33,7 @@ POST ROUTE
 ============= */
 //CREATE POST
 posts.post("/", (req, res) => {
+  console.log(req.body);
   Post.create(req.body, (err, createdPost) => {
     console.log(
       `This is the post you just created ==================================${createdPost}================================================`
@@ -149,6 +150,7 @@ PUT ROUTE
 DELETE ROUTE
 ============= */
 //DELETE POST
+
 // posts.delete("/:postId", (req, res) => {
 //   Post.findByIdAndRemove(req.params.postId, (err, deletedPost) => {
 //     console.log(
@@ -193,9 +195,8 @@ posts.delete("/:postId", async (req, res) => {
         `This is the post you just deleted ==================================${data}================================================`
       );
     }
+
+    res.redirect("/posts");
   });
-
-  res.redirect("/posts");
 });
-
 module.exports = posts;
