@@ -69,6 +69,8 @@ const postController = require("./controllers/post_controller.js");
 app.use("/posts", postController);
 const userController = require("./controllers/user_controller.js");
 app.use("/user", userController);
+const commentController = require("./controllers/comment_controller.js");
+app.use("/comment", commentController);
 // =======================================
 //              ROUTES
 // =======================================
