@@ -84,6 +84,13 @@ app.get('/', (req, res) => {
 
 io.on('connection', (socket) => {
   console.log('a user connected');
+  socket.on('test', (msg) => {
+    console.log('message: ' + msg);
+    io.emit('chatid', msg);
+  });
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
 });
 
 http.listen(3000, () => {
