@@ -30,6 +30,7 @@ POST ROUTE
 ============= */
 //CREATE POST
 posts.post("/", (req, res) => {
+  console.log(req.body);
   Post.create(req.body, (err, createdPost) => {
     console.log(
       `This is the post you just created ==================================${createdPost}================================================`
