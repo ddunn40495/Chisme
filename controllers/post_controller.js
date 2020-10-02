@@ -42,6 +42,31 @@ posts.post("/", (req, res) => {
 });
 
 /* ===========
+POST ROUTE
+============= */
+//CREATE COMMENT
+posts.post("/:id/comment", (req, res) => {
+  Post.findById(req.params.id, (err, foundPost) => {
+    Comment.create(req.body, (err, createdComment) => {
+      foundPost.comments.push(createdComment);
+      foundPost.save((err, data) => {
+        res.json(data);
+      });
+    });
+  });
+});
+/* ===========
+GET ROUTE
+============= */
+//SHOW POST
+
+posts.get("/:id", (req, res) => {
+  Post.findById(req.params.id, (err, foundPost) => {
+    res.json(foundPost);
+  });
+});
+
+/* ===========
 GET ROUTE
 ============= */
 //INDEX POST
