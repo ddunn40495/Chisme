@@ -2,10 +2,12 @@ const mongoose = require("mongoose");
 
 const postSchema = new mongoose.Schema(
   {
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-    },
+    //=======Temporarily leaving this out for testing purposes======
+    // user: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: "User",
+    // },
+    //=============== Add it back later if need to be =============
     subject: {
       type: String,
     },

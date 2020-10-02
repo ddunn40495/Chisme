@@ -25,19 +25,34 @@ class RightBar extends React.Component {
 }
 
 
+
+
 // THIS WILL BE A CLASS TO RENDER ALL THE POSTS
 // STORED IN THE POSTS ARRAY
 
 class AllPosts extends React.Component {
 
 
+
     render = () => {
         return <div className="all-posts-container">
-            <ul className="list-posts">
+            <ul className="list-posts ">
                 {this.props.postList.map((post) => {
                     return <li className="single-post" key={post._id}>
                         <h6 className="post-subject">subject: {post.subject}</h6>
                         <p className="post-body">body: {post.body}</p>
+
+                        <ul className="list-of-comments ">
+                            <h6>Comments Box</h6>
+                            {
+                                post.comments.map((comment) => {
+                                    return <li key={comment._id}>
+                                        {comment.text}
+                                    </li>
+                                }
+                                )
+                            }
+                        </ul>
                     </li>
                 }
                 )}
@@ -47,6 +62,10 @@ class AllPosts extends React.Component {
 
 }
 
+document.addEventListener('DOMContentLoaded', function () {
+    var elems = document.querySelectorAll('.collapsible');
+    var instances = M.Collapsible.init(elems, options);
+});
 
 
 // ====== THIS FORM IS TO CREATE A NEW POST====
@@ -57,7 +76,7 @@ class PostForm extends React.Component {
     //AND ADDING AN ARRAY TAHT WILL STORE ALL THE
     //POSTS
     state = {
-        user: "5f762749417ba037396912b0",
+        user: "",
         subject: "",
         body: "",
         comments: [],
@@ -137,6 +156,7 @@ class PostForm extends React.Component {
 }
 
 // ======== CONTAINS ALL THE OTHER CLASSES IN A SIGLE MAIN CLASS==
+// this is what gets send to the ReactDOM.render();
 class App extends React.Component {
     render = () => {
         return <div className="main-body">

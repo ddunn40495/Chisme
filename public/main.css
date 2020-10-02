@@ -65,3 +65,8 @@
   padding: 12px;
   margin-bottom: 12px;
 }
+
+/* For comments inside the post */
+.list-of-comments{
+  background-color: cornflowerblue;
+}
