@@ -33,7 +33,6 @@ POST ROUTE
 ============= */
 //CREATE POST
 posts.post("/", (req, res) => {
-  console.log(req.body);
   Post.create(req.body, (err, createdPost) => {
     console.log(
       `This is the post you just created ==================================${createdPost}================================================`
@@ -75,7 +74,7 @@ GET ROUTE
 //INDEX POST
 posts.get("/", (req, res) => {
   Post.find({})
-    .sort({ updatedAt: -1 })
+    .sort({ createdAt: 1 })
     .populate("comments")
     .exec((err, posts) => {
       if (err) {
@@ -108,48 +107,48 @@ posts.put("/:postId", (req, res) => {
 });
 
 /* ===========
-PUT ROUTE
+DELETE ROUTE
 ============= */
-//UPDATE COMMENT
+//DELETE COMMENT
 
-// posts.put("/:postId/comment/:commentId", (req, res) => {
-//   Comment.findByIdAndUpdate(
-//     req.params.commentId,
-//     req.body,
-//     { new: true },
-//     (err, updatedComment) => {
-//       Post.findById(req.params.postId, (err, foundPost) => {
-//         foundPost.comments.id(req.params.commentId).remove();
-//         foundPost.comments.push(req.params.commentId);
-//         foundPost.save((err, data) => {
-//           res.redirect("/posts");
-//         });
-//       });
-//     }
-//   );
-// });
+posts.delete("/:postId/comment/:commentId", (req, res) => {
+  Comment.findByIdAndRemove(req.params.commentId).then((err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(
+        `This is the comment you just deleted ==================================${data}================================================`
+      );
+    }
 
-// post.put("/:postId/comment/:commentId", (req, res) => {
-//   async.waterfall([findComment, findPost, sendPost], (err, data) => {});
-//   const findComment = () => {
-//     const comment = await Comment.findByIdAndUpdate(req.params.comment.Id, req.body, {
-//       new: true,
-//     });
-//     return comment
-//   };
-//   const findPost = () => {
-//     const post = await Post.findById(req.params.postId, (err, foundPost))
-//     return post
-//   };
-//   const sendPost = () => {
-
-//   }
-// });
+    res.redirect("/posts");
+  });
+});
 
 /* ===========
 DELETE ROUTE
 ============= */
 //DELETE POST
+
+posts.delete("/:postId", async (req, res) => {
+  await Post.findByIdAndRemove(req.params.postId).then((err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(
+        `This is the post you just deleted ==================================${data}================================================`
+      );
+    }
+
+    res.redirect("/posts");
+  });
+});
+
+module.exports = posts;
+
+///graveyard
+
+//delete routes for post
 
 // posts.delete("/:postId", (req, res) => {
 //   Post.findByIdAndRemove(req.params.postId, (err, deletedPost) => {
@@ -186,17 +185,20 @@ DELETE ROUTE
 //     });
 // });
 
-posts.delete("/:postId", async (req, res) => {
-  await Post.findByIdAndRemove(req.params.postId).then((err, data) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(
-        `This is the post you just deleted ==================================${data}================================================`
-      );
-    }
+// put routes for comments
+// post.put("/:postId/comment/:commentId", (req, res) => {
+//   async.waterfall([findComment, findPost, sendPost], (err, data) => {});
+//   const findComment = () => {
+//     const comment = await Comment.findByIdAndUpdate(req.params.comment.Id, req.body, {
+//       new: true,
+//     });
+//     return comment
+//   };
+//   const findPost = () => {
+//     const post = await Post.findById(req.params.postId, (err, foundPost))
+//     return post
+//   };
+//   const sendPost = () => {
 
-    res.redirect("/posts");
-  });
-});
-module.exports = posts;
+//   }
+// });
