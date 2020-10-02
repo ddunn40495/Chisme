@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { db } = require("./chat");
 
 const postSchema = new mongoose.Schema(
   {

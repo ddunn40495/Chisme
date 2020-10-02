@@ -25,10 +25,11 @@
 
 
 .add-new-post{
-  background-color: rgb(41, 117, 168);
+  /* background-color: rgb(41, 117, 168); */
   padding: 12px;
   margin: 0 auto;
 }
+
 
 .new-post-form {
   background-color: rgb(233, 233, 233);
@@ -52,6 +53,11 @@
 
 
 /* ADDING CHANGES TO EACH CREATED POST AND BODY */
+.all-posts-container{
+  background-color: darkgreen;
+  padding: 12px;
+  margin-top: 40px;
+}
 
 /* this will render the post for most recent */
 .list-posts{
@@ -68,5 +74,28 @@
 
 /* For comments inside the post */
 .list-of-comments{
-  background-color: cornflowerblue;
+  background-color: rgb(47, 91, 172);
+}
+
+.new-comment-form{
+  width: 90%;
+  margin:20px auto;
+}
+
+.comment-textarea{
+  height: 70px;
+  padding: 12px;
+  resize: none;
+  outline: none;
+  margin-top: 15px;
+}
+
+
+.single-comment{
+  widows: 90%;
+  margin: 10px auto;
+  padding: 15px;
+}
+.new-comment-form input{
+  margin-bottom: 15px;
 }
