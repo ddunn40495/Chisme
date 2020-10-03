@@ -130,8 +130,7 @@ posts.put("/:postId/comment/:commentId", (req, res) => {
       if (error) {
         res.send(error);
       } else {
-        res.json(updatedComment)
-
+        res.json(updatedComment);
       }
     }
   );
@@ -142,19 +141,28 @@ DELETE ROUTE
 ============= */
 //DELETE COMMENT
 
-posts.delete("/:postId/comment/:commentId", (req, res) => {
-  Comment.findByIdAndRemove(req.params.commentId).then((err, data) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(
-        `This is the comment you just deleted ==================================${data}================================================`
-      );
-    }
+// posts.delete("/:postId/comment/:commentId", (req, res) => {
+//   console.log(req.params);
+// });
 
-    res.redirect("/posts");
-  });
-});
+// /* ===========
+// DELETE ROUTE
+// ============= */
+// //DELETE COMMENT
+
+// posts.delete("/:postId/comment/:commentId", (req, res) => {
+//   Comment.findByIdAndRemove(req.params.commentId).then((err, data) => {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       console.log(
+//         `This is the comment you just deleted ==================================${data}================================================`
+//       );
+//     }
+
+//     res.redirect("/posts");
+//   });
+// });
 
 /* ===========
 DELETE ROUTE
