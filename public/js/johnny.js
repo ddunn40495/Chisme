@@ -41,6 +41,7 @@ class Comments extends React.Component {
                 onChange={this.props.onChangeComment}></textarea>
             {/* SUBMIT BUTTON TO CREATE A NEW POST*/}
             <input type="submit" value="Send" />
+
         </form>
     }
 }
@@ -102,6 +103,13 @@ class AllPosts extends React.Component {
                                     return <li key={comment._id}
                                         className="single-comment">
                                         {comment.text}
+                                        <details>
+                                            <button
+                                                onClick={this.props.deleteAComment}
+                                                id={comment._id}
+
+                                                data-postid={post._id}>Remove Comment</button>
+                                        </details>
                                     </li>
                                 }
                                 )
@@ -226,7 +234,21 @@ class PostForm extends React.Component {
         )
     }
 
-
+    // A FUNCTION THAT WILL DELETE A SINGLE COMMENT
+    deleteComment = (event) => {
+        console.log(event.target);
+        const id = event.target.id;
+        const postId = event.target.getAttribute("data-postid");
+        console.log(`${id} + ${postId}`);
+        axios.delete(`/posts/${id}/comment/${postId}`).then(
+            (response) => {
+                // this.setState({
+                //     posts: response.data
+                // })
+                console.log(response);
+            }
+        )
+    }
 
 
     // CREATING THE FORM TO BE RENDERED IN THE INDEX
@@ -256,6 +278,7 @@ class PostForm extends React.Component {
                 editAPost={this.editPost}
                 submitNComment={this.SubmitComment}
                 handleCommentChange={this.handleChange}
+                deleteAComment={this.deleteComment}
             />
 
         </div>
@@ -264,7 +287,7 @@ class PostForm extends React.Component {
 }
 
 // ======== CONTAINS ALL THE OTHER CLASSES IN A SIGLE MAIN CLASS==
-// this is what gets send to the ReactDOM.render();
+// this is what gets sent to the ReactDOM.render();
 class App extends React.Component {
     render = () => {
         return <div className="main-body">
