@@ -100,7 +100,15 @@ posts.put("/:postId", (req, res) => {
       if (error) {
         res.send(error);
       } else {
-        res.redirect("/posts");
+        Post.find({})
+          .sort({ createdAt: 1 })
+          .populate({ path: "comments", populate: { path: "postedBy" } })
+          .exec((err, posts) => {
+            if (err) {
+              console.log(err);
+            }
+            res.json(posts);
+          });
       }
     }
   );
@@ -122,7 +130,8 @@ posts.put("/:postId/comment/:commentId", (req, res) => {
       if (error) {
         res.send(error);
       } else {
-        res.redirect("/posts");
+        res.json(updatedComment)
+
       }
     }
   );
@@ -162,7 +171,15 @@ posts.delete("/:postId", async (req, res) => {
       );
     }
 
-    res.redirect("/posts");
+    Post.find({})
+      .sort({ createdAt: 1 })
+      .populate({ path: "comments", populate: { path: "postedBy" } })
+      .exec((err, posts) => {
+        if (err) {
+          console.log(err);
+        }
+        res.json(posts);
+      });
   });
 });
 
