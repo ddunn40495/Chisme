@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
-const commentSchema = new mongoose.Schema(
+const messageSchema = new mongoose.Schema(
   {
-    postedBy: [
+    sentBy: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
@@ -13,6 +13,6 @@ const commentSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Comment = mongoose.model("Comment", commentSchema);
+const Message = mongoose.model("Message", messageSchema);
 
-module.exports = Comment;
+module.exports = Message;
