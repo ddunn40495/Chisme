@@ -6,7 +6,6 @@ const mongoose = require("mongoose");
 const app = express();
 const cors = require("cors");
 
-
 //testing socket io
 // var http = require('http').createServer(app);
 // var io = require('socket.io')(http);
@@ -79,14 +78,16 @@ app.use("/comment", commentController);
 // =======================================
 //              ROUTES
 // =======================================
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/public/index.html');
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/public/index.html");
 });
+
+// app.get("/delete", (req, res) => {
+//   res.redirect("/posts");
+// });
 // =======================================
 //              LISTENER
 // =======================================
-
-
 
 // http.listen(port, () => {
 //   console.log('io listening on *:3000');
@@ -96,15 +97,15 @@ const server = app.listen(port, () => {
   console.log(`listening on port: ${port}`);
 });
 
-io = require("socket.io")(server)
+io = require("socket.io")(server);
 
-io.on('connection', (socket) => {
-  console.log('a user connected');
-  socket.on('test', (msg) => {
-    console.log('message: ' + msg);
-    io.emit('chatid', msg);
+io.on("connection", (socket) => {
+  console.log("a user connected");
+  socket.on("test", (msg) => {
+    console.log("message: " + msg);
+    io.emit("chatid", msg);
   });
-  socket.on('disconnect', () => {
-    console.log('user disconnected');
+  socket.on("disconnect", () => {
+    console.log("user disconnected");
   });
 });

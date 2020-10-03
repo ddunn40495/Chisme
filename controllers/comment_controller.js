@@ -13,6 +13,7 @@ const Chat = require("../models/chat");
 const Comment = require("../models/comment");
 const User = require("../models/user");
 const Post = require("../models/post");
+// const async = require("async");
 // const isAuthenticated = (req, res, next) => {
 //     if (req.session.currentUser) {
 //       return next()
@@ -44,17 +45,25 @@ const Post = require("../models/post");
   DELETE ROUTE
   ============= */
 comments.delete("/:commentId", (req, res) => {
-  Comment.findByIdAndRemove(req.params.commentId).then((err, data) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(
-        `This is the comment you just deleted ==================================${data}================================================`
-      );
-    }
-
-    res.redirect("/posts");
-  });
+  Comment.findByIdAndRemove(req.params.commentId)
+    .then((err, data) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(data);
+      }
+    })
+    .then(() => {
+      Post.find({})
+        .sort({ createdAt: 1 })
+        .populate({ path: "comments", populate: { path: "postedBy" } })
+        .exec((err, posts) => {
+          if (err) {
+            console.log(err);
+          }
+          res.json(posts);
+        });
+    });
 });
 
 module.exports = comments;
