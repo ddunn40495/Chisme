@@ -8,7 +8,7 @@
 //       DEPENDENCIES
 // =========================
 const express = require("express");
-const async = require("async");
+// const async = require("async");
 const posts = express.Router();
 const Chat = require("../models/chat");
 const Comment = require("../models/comment");
@@ -152,8 +152,8 @@ DELETE ROUTE
 ============= */
 //DELETE POST
 
-posts.delete("/:postId", async (req, res) => {
-  await Post.findByIdAndRemove(req.params.postId).then((err, data) => {
+posts.delete("/:postId", (req, res) => {
+  Post.findByIdAndRemove(req.params.postId).then((err, data) => {
     if (err) {
       console.log(err);
     } else {
