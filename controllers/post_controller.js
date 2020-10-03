@@ -152,8 +152,8 @@ DELETE ROUTE
 ============= */
 //DELETE POST
 
-posts.delete("/:postId", async (req, res) => {
-  await Post.findByIdAndRemove(req.params.postId).then((err, data) => {
+posts.delete("/:postId", (req, res) => {
+  Post.findByIdAndRemove(req.params.postId).then((err, data) => {
     if (err) {
       console.log(err);
     } else {
