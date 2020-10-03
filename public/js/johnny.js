@@ -6,6 +6,9 @@ class LeftBar extends React.Component {
     render = () => {
         return <div className="left-main-bar">
             <h1>Left Bar</h1>
+            <div className="edgar-js">
+
+            </div>
         </div>
     }
 
