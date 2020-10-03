@@ -8,7 +8,7 @@
 //       DEPENDENCIES
 // =========================
 const express = require("express");
-// const async = require("async");
+const async = require("async");
 const posts = express.Router();
 const Chat = require("../models/chat");
 const Comment = require("../models/comment");
