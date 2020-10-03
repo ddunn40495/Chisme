@@ -75,7 +75,7 @@ GET ROUTE
 posts.get("/", (req, res) => {
   Post.find({})
     .sort({ createdAt: 1 })
-    .populate("comments")
+    .populate({ path: "comments", populate: { path: "postedBy" } })
     .exec((err, posts) => {
       if (err) {
         console.log(err);
