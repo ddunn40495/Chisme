@@ -34,6 +34,8 @@
 .new-post-form {
   background-color: rgb(233, 233, 233);
   padding: 12px;
+  border-radius: 3px;
+  border: 1px solid rgba(124, 124, 124, 0.692);
 }
 .new-post-form input{
   padding: 12px;
@@ -66,6 +68,7 @@
 }
 
 .single-post{
+  position: relative;
   min-height: 150px;
   background-color: burlywood;
   padding: 12px;
@@ -74,12 +77,15 @@
 
 /* For comments inside the post */
 .list-of-comments{
-  background-color: rgb(47, 91, 172);
+  background-color: rgb(226, 146, 146);
+  padding: 12px;
 }
 
 .new-comment-form{
   width: 90%;
   margin:20px auto;
+  background-color: rgb(1, 171, 184);
+  padding: 12px;
 }
 
 .comment-textarea{
@@ -89,13 +95,35 @@
   outline: none;
   margin-top: 15px;
 }
-
+.new-comment-form input{
+  margin-bottom: 12px;
+}
 
 .single-comment{
-  widows: 90%;
+  width: 85%;
   margin: 10px auto;
   padding: 15px;
+  background-color: thistle;
+  border: 1px solid rgba(112, 112, 112, 0.644);
+  border-radius: 5px;
 }
-.new-comment-form input{
-  margin-bottom: 15px;
+
+
+
+/* Lets work on the drop down menu for delete and update */
+.menu-delete-edit{
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: rgba(255, 255, 255, 0.836);
+  padding: 12px;
+  border-radius: 3px;
+  border: 1px solid rgba(131, 131, 131, 0.692);
+}
+details summary{
+  outline: none;
+}
+
+.menu-delete-edit:hover{
+  background-color: rgb(109, 135, 252);
 }

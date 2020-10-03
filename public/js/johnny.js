@@ -1,5 +1,4 @@
 
-
 // THIS WILL BE USED TO RENDER ANY PROPERTY ON
 //THE LEFT SIDE OF THE BODY
 class LeftBar extends React.Component {
@@ -11,6 +10,8 @@ class LeftBar extends React.Component {
     }
 
 }
+
+
 
 
 // THIS WILL BE USED TO RENDER ANY PROPERTY ON
@@ -51,14 +52,19 @@ class AllPosts extends React.Component {
 
 
 
+
     render = () => {
+
+
         return <div className="all-posts-container">
             <ul className="list-posts ">
                 {this.props.postList.map((post) => {
                     return <li className="single-post" key={post._id}>
                         <h6 className="post-subject">subject: {post.subject}</h6>
                         <p className="post-body">body: {post.body}</p>
+
                         <details className="menu-delete-edit">
+
                             <summary></summary>
                             <button onClick={this.props.deleteAPost} id={post._id}>Delete Post</button>
                             <details>
@@ -107,10 +113,10 @@ class AllPosts extends React.Component {
 
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    var elems = document.querySelectorAll('.collapsible');
-    var instances = M.Collapsible.init(elems, options);
-});
+// document.addEventListener('DOMContentLoaded', function () {
+//     var elems = document.querySelectorAll('.collapsible');
+//     var instances = M.Collapsible.init(elems, options);
+// });
 
 
 // ====== THIS FORM IS TO CREATE A NEW POST====
