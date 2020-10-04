@@ -4,12 +4,13 @@
 class LeftBar extends React.Component {
 
     render = () => {
-        return <div className="left-main-bar">
-            <h1>Left Bar</h1>
-            <div className="edgar-js">
+        return (
+            <div className="left-main-bar">
+                <h1 className="test-title" data-target="try-bar"><i className="material-icons left-arrow">double_arrow</i></h1>
+                <div className="edgar-js" id="try-bar">
 
-            </div>
-        </div>
+                </div>
+            </div>)
     }
 
 }
@@ -40,8 +41,7 @@ class Comments extends React.Component {
                 placeholder="write a comment"
                 onChange={this.props.onChangeComment}></textarea>
             {/* SUBMIT BUTTON TO CREATE A NEW POST*/}
-            <input type="submit" value="Send" />
-
+            <button type="submit" className="transparent comment-button"><i className="material-icons reply">message</i></button>
         </form>
     }
 }
@@ -64,8 +64,10 @@ class AllPosts extends React.Component {
             <ul className="list-posts ">
                 {this.props.postList.map((post) => {
                     return <li className="single-post" key={post._id}>
-                        <h6 className="post-subject">subject: {post.subject}</h6>
-                        <p className="post-body">body: {post.body}</p>
+                        <div className="subject-body-container">
+                            <h6 className="post-subject">subject: {post.subject}</h6>
+                            <p className="post-body">body: {post.body}</p>
+                        </div>
 
                         <details className="menu-delete-edit">
 
@@ -93,11 +95,7 @@ class AllPosts extends React.Component {
                         </details>
 
                         <ul className="list-of-comments">
-                            <Comments
-                                onChangeComment={this.props.handleCommentChange}
-                                submitComment={this.props.submitNComment}
-                                postId={post._id}
-                            />
+
                             {
                                 post.comments.map((comment) => {
                                     return <li key={comment._id}
@@ -115,6 +113,11 @@ class AllPosts extends React.Component {
                                 )
                             }
                         </ul>
+                        <Comments
+                            onChangeComment={this.props.handleCommentChange}
+                            submitComment={this.props.submitNComment}
+                            postId={post._id}
+                        />
                     </li>
                 }
                 )}
@@ -280,7 +283,6 @@ class PostForm extends React.Component {
                 handleCommentChange={this.handleChange}
                 deleteAComment={this.deleteComment}
             />
-
         </div>
     }
 
@@ -293,7 +295,6 @@ class App extends React.Component {
         return <div className="main-body">
             <LeftBar />
             <div className="middle-bar" >
-                <h1>Main body</h1>
                 <PostForm />
             </div>
             <RightBar />
