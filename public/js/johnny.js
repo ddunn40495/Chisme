@@ -5,12 +5,13 @@ var socket = io();
 class LeftBar extends React.Component {
 
     render = () => {
-        return <div className="left-main-bar">
-            <h1>Left Bar</h1>
-            <div className="edgar-js">
+        return (
+            <div className="left-main-bar">
+                <h1 className="test-title" data-target="try-bar"><i className="material-icons left-arrow">double_arrow</i></h1>
+                <div className="edgar-js" id="try-bar">
 
-            </div>
-        </div>
+                </div>
+            </div>)
     }
 
 }
@@ -41,7 +42,7 @@ class Comments extends React.Component {
                 placeholder="write a comment"
                 onChange={this.props.onChangeComment}></textarea>
             {/* SUBMIT BUTTON TO CREATE A NEW POST*/}
-            <input type="submit" value="Send" />
+            <button type="submit" className="transparent comment-button"><i className="material-icons reply">message</i></button>
         </form>
     }
 }
@@ -64,8 +65,10 @@ class AllPosts extends React.Component {
             <ul className="list-posts ">
                 {this.props.postList.map((post) => {
                     return <li className="single-post" key={post._id}>
-                        <h6 className="post-subject">subject: {post.subject}</h6>
-                        <p className="post-body">body: {post.body}</p>
+                        <div className="subject-body-container">
+                            <h6 className="post-subject">subject: {post.subject}</h6>
+                            <p className="post-body">body: {post.body}</p>
+                        </div>
 
                         <details className="menu-delete-edit">
 
@@ -93,21 +96,29 @@ class AllPosts extends React.Component {
                         </details>
                         {/* ==========EDGAR IS WORKING HERE!========== */}
                         <ul className="list-of-comments">
-                            <Comments
-                                onChangeComment={this.props.handleCommentChange}
-                                submitComment={this.props.submitNComment}
-                                postId={post._id}
-                            />
+
                             {
                                 post.comments.map((comment) => {
                                     return <li key={comment._id}
                                         className="single-comment">
                                         {comment.text}
+                                        <details>
+                                            <button
+                                                onClick={this.props.deleteAComment}
+                                                id={comment._id}
+
+                                                data-postid={post._id}>Remove Comment</button>
+                                        </details>
                                     </li>
                                 }
                                 )
                             }
                         </ul>
+                        <Comments
+                            onChangeComment={this.props.handleCommentChange}
+                            submitComment={this.props.submitNComment}
+                            postId={post._id}
+                        />
                     </li>
                 }
                 )}
@@ -248,7 +259,21 @@ class PostForm extends React.Component {
         )
     }
 
-
+    // A FUNCTION THAT WILL DELETE A SINGLE COMMENT
+    deleteComment = (event) => {
+        console.log(event.target);
+        const id = event.target.id;
+        const postId = event.target.getAttribute("data-postid");
+        console.log(`${id} + ${postId}`);
+        axios.delete(`/posts/${id}/comment/${postId}`).then(
+            (response) => {
+                // this.setState({
+                //     posts: response.data
+                // })
+                console.log(response);
+            }
+        )
+    }
 
 
     // CREATING THE FORM TO BE RENDERED IN THE INDEX
@@ -278,21 +303,20 @@ class PostForm extends React.Component {
                 editAPost={this.editPost}
                 submitNComment={this.SubmitComment}
                 handleCommentChange={this.handleChange}
+                deleteAComment={this.deleteComment}
             />
-
         </div>
     }
 
 }
 
 // ======== CONTAINS ALL THE OTHER CLASSES IN A SIGLE MAIN CLASS==
-// this is what gets send to the ReactDOM.render();
+// this is what gets sent to the ReactDOM.render();
 class App extends React.Component {
     render = () => {
         return <div className="main-body">
             <LeftBar />
             <div className="middle-bar" >
-                <h1>Main body</h1>
                 <PostForm />
             </div>
             <RightBar />
