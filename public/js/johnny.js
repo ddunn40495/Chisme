@@ -95,7 +95,7 @@ class AllPosts extends React.Component {
                             </details>
                         </details>
                         {/* ==========EDGAR IS WORKING HERE!========== */}
-                        <ul className="list-of-comments">
+                        <ul className="list-of-comments" id={post._id}>
 
                             {
                                 post.comments.map((comment) => {
@@ -155,6 +155,8 @@ class PostForm extends React.Component {
     // THE POSTS IN AN ARRAY FOR LATER TO BE
     // DISPLAYED
     componentDidMount = () => {
+
+
         axios.get("/posts").then(
             (response) => {
                 this.setState({
@@ -162,13 +164,16 @@ class PostForm extends React.Component {
                 })
             }
         )
-        //========== EDGAR'S SOCKET RECEPTION LINE ==========
 
-        var pid = this.state.socketId // the key of the post id
-        socket.on('chatid', function(msg){
-            // console.log("I am here")
-            $(`[key=${pid}]`).append($('<li class="single-comment">').text(msg));
-        })
+                //========== EDGAR'S SOCKET RECEPTION LINE ==========
+
+                var pid = this.state.socketId // the key of the post id
+                console.log(pid + "THIS BE DA ID")
+                socket.on('chatid', function(msg){
+                    console.log("I am here pt 2" + this.state.socketId)
+                    $(`#${pid}]`).append($('<li class="single-comment">').text(msg));
+                })
+
     }
 
 
@@ -196,9 +201,6 @@ class PostForm extends React.Component {
     // CREATES A NEW POST
     //Edgar's edit, this is also creating new keys for comments even though they don't exist in state
     handleChange = event => {
-        console.log("user is typing...")
-        console.log(event.target.id)
-        console.log(event.target.value)
         this.setState({
             [event.target.id]: event.target.value
         })
