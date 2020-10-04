@@ -1,15 +1,20 @@
 
+var socket = io();
 // THIS WILL BE USED TO RENDER ANY PROPERTY ON
 //THE LEFT SIDE OF THE BODY
+let pid = 0 // the key of the post id
 class LeftBar extends React.Component {
 
     render = () => {
-        return <div className="left-main-bar">
-            <h1>Left Bar</h1>
-            <div className="edgar-js">
+        return (
+            <div className="left-main-bar">
+                <h1 className="test-title" data-target="try-bar"><i className="material-icons left-arrow">double_arrow</i></h1>
+                <div className="edgar-js" id="try-bar">
 
-            </div>
-        </div>
+                </div>
+
+                <div className="buttons-auth"></div>
+            </div>)
     }
 
 }
@@ -40,7 +45,7 @@ class Comments extends React.Component {
                 placeholder="write a comment"
                 onChange={this.props.onChangeComment}></textarea>
             {/* SUBMIT BUTTON TO CREATE A NEW POST*/}
-            <input type="submit" value="Send" />
+            <button type="submit" className="transparent comment-button"><i className="material-icons reply">message</i></button>
         </form>
     }
 }
@@ -63,8 +68,10 @@ class AllPosts extends React.Component {
             <ul className="list-posts ">
                 {this.props.postList.map((post) => {
                     return <li className="single-post" key={post._id}>
-                        <h6 className="post-subject">subject: {post.subject}</h6>
-                        <p className="post-body">body: {post.body}</p>
+                        <div className="subject-body-container">
+                            <h6 className="post-subject">subject: {post.subject}</h6>
+                            <p className="post-body">body: {post.body}</p>
+                        </div>
 
                         <details className="menu-delete-edit">
 
@@ -90,23 +97,32 @@ class AllPosts extends React.Component {
                                 </form>
                             </details>
                         </details>
+                        {/* ==========EDGAR IS WORKING HERE!========== */}
+                        <ul className="list-of-comments" id={post._id}>
 
-                        <ul className="list-of-comments">
-                            <Comments
-                                onChangeComment={this.props.handleCommentChange}
-                                submitComment={this.props.submitNComment}
-                                postId={post._id}
-                            />
                             {
                                 post.comments.map((comment) => {
                                     return <li key={comment._id}
                                         className="single-comment">
                                         {comment.text}
+                                        <details>
+                                            <summary></summary>
+                                            <button
+                                                onClick={this.props.deleteAComment}
+                                                id={comment._id}
+
+                                                data-postid={post._id}>Remove Comment</button>
+                                        </details>
                                     </li>
                                 }
                                 )
                             }
                         </ul>
+                        <Comments
+                            onChangeComment={this.props.handleCommentChange}
+                            submitComment={this.props.submitNComment}
+                            postId={post._id}
+                        />
                     </li>
                 }
                 )}
@@ -135,6 +151,7 @@ class PostForm extends React.Component {
         body: "",
         comments: [],
         posts: [],
+        socketId: ""
     }
 
     // THIS WILL BE TRIGGER EVERYTIME THE
@@ -149,6 +166,18 @@ class PostForm extends React.Component {
                 })
             }
         )
+        //========== EDGAR'S SOCKET RECEPTION LINE ==========
+        console.log(pid + "THIS BE DA ID")
+        socket.on('chatid', function(stuff){
+            console.log("I am here pt 2: " + stuff.msg)
+            // console.log($(`ul[id=${stuff.pid2}]`))
+            let myParent = $(`ul[id=${stuff.pid2}]`)
+            let child1 = $('<li class="single-comment">').text(stuff.msg)
+            let button = $("<button>").text("Remove Comment")
+            let child2 = $("<details>").append(button)
+            child1.append(child2)
+            myParent.append(child1);
+        })
     }
 
 
@@ -174,6 +203,7 @@ class PostForm extends React.Component {
     // THE KEY HAS TO MATCH THE PROPERTIES IN
     // STATE SO IT CAN BE SAVED ONCE THE USER
     // CREATES A NEW POST
+    //Edgar's edit, this is also creating new keys for comments even though they don't exist in state
     handleChange = event => {
         this.setState({
             [event.target.id]: event.target.value
@@ -213,20 +243,49 @@ class PostForm extends React.Component {
 
 
     // A FUNCTION THAT WILL CREATE A NEW COMMENT
+    //========== EDGAR'S SOCKET SUBMISSION LINE ==========
     SubmitComment = (event) => {
         event.preventDefault();
+
         event.currentTarget.reset();
         const id = event.target.id;
         axios.post("/posts/" + id + "/comment", this.state).then(
             (response) => {
+                console.log(response)
                 this.setState({
-                    posts: response.data,
+                    socketId: response.data[response.data.length -1]._id,
                 })
+                pid = this.state.socketId
+                console.log(this.state.socketId)
+            }
+        )
+
+
+        // console.log(event.target)
+        pid = $(event.target).parent().children().eq(2).attr("id")
+        let pid2 = pid
+
+        console.log(this.state.text) // edgar testing
+        var msg = this.state.text //the msg being transerred to socket id
+        console.log(msg)
+        socket.emit('test', {msg, pid2}); // socket sending msg + the id of the particular post
+    }
+
+    // A FUNCTION THAT WILL DELETE A SINGLE COMMENT
+    deleteComment = (event) => {
+        console.log(event.target);
+        const id = event.target.id;
+        const postId = event.target.getAttribute("data-postid");
+        console.log(`${id} + ${postId}`);
+        axios.delete(`/posts/${id}/comment/${postId}`).then(
+            (response) => {
+                // this.setState({
+                //     posts: response.data
+                // })
+                console.log(response);
             }
         )
     }
-
-
 
 
     // CREATING THE FORM TO BE RENDERED IN THE INDEX
@@ -256,21 +315,20 @@ class PostForm extends React.Component {
                 editAPost={this.editPost}
                 submitNComment={this.SubmitComment}
                 handleCommentChange={this.handleChange}
+                deleteAComment={this.deleteComment}
             />
-
         </div>
     }
 
 }
 
 // ======== CONTAINS ALL THE OTHER CLASSES IN A SIGLE MAIN CLASS==
-// this is what gets send to the ReactDOM.render();
+// this is what gets sent to the ReactDOM.render();
 class App extends React.Component {
     render = () => {
         return <div className="main-body">
             <LeftBar />
             <div className="middle-bar" >
-                <h1>Main body</h1>
                 <PostForm />
             </div>
             <RightBar />
