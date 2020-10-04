@@ -2,6 +2,7 @@
 var socket = io();
 // THIS WILL BE USED TO RENDER ANY PROPERTY ON
 //THE LEFT SIDE OF THE BODY
+let pid = 0 // the key of the post id
 class LeftBar extends React.Component {
 
     render = () => {
@@ -103,6 +104,7 @@ class AllPosts extends React.Component {
                                         className="single-comment">
                                         {comment.text}
                                         <details>
+                                            <summary></summary>
                                             <button
                                                 onClick={this.props.deleteAComment}
                                                 id={comment._id}
@@ -155,8 +157,6 @@ class PostForm extends React.Component {
     // THE POSTS IN AN ARRAY FOR LATER TO BE
     // DISPLAYED
     componentDidMount = () => {
-
-
         axios.get("/posts").then(
             (response) => {
                 this.setState({
@@ -164,16 +164,18 @@ class PostForm extends React.Component {
                 })
             }
         )
-
-                //========== EDGAR'S SOCKET RECEPTION LINE ==========
-
-                var pid = this.state.socketId // the key of the post id
-                console.log(pid + "THIS BE DA ID")
-                socket.on('chatid', function(msg){
-                    console.log("I am here pt 2" + this.state.socketId)
-                    $(`#${pid}]`).append($('<li class="single-comment">').text(msg));
-                })
-
+        //========== EDGAR'S SOCKET RECEPTION LINE ==========
+        console.log(pid + "THIS BE DA ID")
+        socket.on('chatid', function(stuff){
+            console.log("I am here pt 2: " + stuff.msg)
+            // console.log($(`ul[id=${stuff.pid2}]`))
+            let myParent = $(`ul[id=${stuff.pid2}]`)
+            let child1 = $('<li class="single-comment">').text(stuff.msg)
+            let button = $("<button>").text("Remove Comment")
+            let child2 = $("<details>").append(button)
+            child1.append(child2)
+            myParent.append(child1);
+        })
     }
 
 
@@ -243,11 +245,6 @@ class PostForm extends React.Component {
     SubmitComment = (event) => {
         event.preventDefault();
 
-        console.log(this.state.text) // edgar testing
-        var msg = this.state.text //the msg being transerred to socket id
-        console.log(msg)
-        socket.emit('test', msg); // socket sending msg
-
         event.currentTarget.reset();
         const id = event.target.id;
         axios.post("/posts/" + id + "/comment", this.state).then(
@@ -256,9 +253,20 @@ class PostForm extends React.Component {
                 this.setState({
                     socketId: response.data[response.data.length -1]._id,
                 })
+                pid = this.state.socketId
                 console.log(this.state.socketId)
             }
         )
+
+
+        // console.log(event.target)
+        pid = $(event.target).parent().children().eq(2).attr("id")
+        let pid2 = pid
+
+        console.log(this.state.text) // edgar testing
+        var msg = this.state.text //the msg being transerred to socket id
+        console.log(msg)
+        socket.emit('test', {msg, pid2}); // socket sending msg + the id of the particular post
     }
 
     // A FUNCTION THAT WILL DELETE A SINGLE COMMENT
