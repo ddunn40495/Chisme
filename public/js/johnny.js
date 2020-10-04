@@ -10,6 +10,8 @@ class LeftBar extends React.Component {
                 <div className="edgar-js" id="try-bar">
 
                 </div>
+
+                <div className="buttons-auth"></div>
             </div>)
     }
 
