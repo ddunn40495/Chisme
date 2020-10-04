@@ -2,10 +2,19 @@
 
 .right-main-bar{
     position: sticky;
-    background-color: rgb(82, 89, 131);
+    /* background-color: rgb(243, 243, 243); */
+    background:  #23232e;
+    color: rgb(161, 168, 190);
+    text-orientation: mixed;
+    writing-mode: vertical-lr;
+
+
     width: 200px;
     top: 0;
     right: 0;
     bottom: 0;
     height: 100vh;
+    border-left: 1px solid rgba(97, 97, 97, 0.575);
+    box-shadow: 1px 1px 5px 2px black;
+    padding: 12px;
 }

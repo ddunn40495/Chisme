@@ -11,13 +11,19 @@
   bottom: 0;
   right: 0;
   left: 0;
-  background-color: rgb(173, 13, 13);
   display: flex;
   justify-content: space-between;
 }
 
 .middle-bar{
-  background-color: rgb(39, 177, 108);
+  background-color: rgb(253, 253, 253);
+  background-image: url("https://i.pinimg.com/originals/e4/a5/27/e4a527e6f8bfc9ea4eecf4a88c04f86f.jpg");
+  /* background-image: url("https://i.pinimg.com/originals/81/5b/ed/815bedb1bad405f763e405eed29dd7f1.jpg"); */
+  /* background-image: url("https://papers.co/wallpaper/papers.co-vs22-paint-abstract-background-htc-dark-orange-blue-pattern-36-3840x2400-4k-wallpaper.jpg"); */
+  /* background-image: url("https://cdn.northsoundchurch.com/wp-content/uploads/2017/05/29172021/abstract-background-brown-and-blue-circles.jpg"); */
+  
+
+  background-size: cover;
   flex-grow: 1;
   overflow: auto;
   padding: 20px;
@@ -25,20 +31,24 @@
 
 
 .add-new-post{
-  /* background-color: rgb(41, 117, 168); */
+  /* background-color: rgba(118, 142, 156, 0.582); */
+  background-color: #232d2e00;
+  max-width: 750px;
   padding: 12px;
   margin: 0 auto;
+  border-radius: 3px;
 }
 
-
 .new-post-form {
-  background-color: rgb(233, 233, 233);
+  background-color: rgb(253, 253, 253);
   padding: 12px;
   border-radius: 3px;
-  border: 1px solid rgba(124, 124, 124, 0.692);
+  border: 1px solid rgba(0, 0, 0, 0.425);
+  font-size: 1em;
 }
 .new-post-form input{
   padding: 12px;
+  color: rgb(0, 0, 0);
 }
 
 .new-post-form textarea{
@@ -46,17 +56,28 @@
   padding: 12px;
   resize: none;
   outline: none;
-  transition-duration: .3s;
-  transition-timing-function: ease-out;
+  transition-duration: .2s;
+  transition-timing-function: ease-in;
+  border: 2px solid rgba(155, 155, 155, 0.603);
+  color: rgba(0, 0, 0, 0.842);
 }
 .new-post-form textarea:focus{
-  border: 2px solid rgb(0, 158, 119);
+  border: 2px solid rgba(0, 140, 158, 0.616);
+}
+.new-post-form input:last-of-type{
+  background-color: rgb(218, 218, 218);
+  color: black;
+  outline: none;
+  border: 1px solid rgba(255, 255, 255, 0.747);
+}
+.new-post-form input:last-of-type:hover{
+  background-color: rgb(94, 94, 94);
 }
 
 
 /* ADDING CHANGES TO EACH CREATED POST AND BODY */
 .all-posts-container{
-  background-color: darkgreen;
+  /* background-color: rgba(39, 39, 39, 0.808); */
   padding: 12px;
   margin-top: 40px;
 }
@@ -70,40 +91,86 @@
 .single-post{
   position: relative;
   min-height: 150px;
-  background-color: burlywood;
+  background-color: rgb(235, 235, 235);
   padding: 12px;
-  margin-bottom: 12px;
+  margin-bottom: 40px;
 }
 
+.subject-body-container{
+  width: 85%;
+  border: 1px solid black;
+  margin: 40px auto 0 auto;
+  padding: 12px;
+  border-radius: 5px;
+}
+
+
+
+
+
+
+
+
+/* ************************************* */
+/* ************************************* */
+/*  ALL THI IS FOR THE COMMENT SECTION */
+/* ************************************* */
+/* ************************************* */
 /* For comments inside the post */
 .list-of-comments{
-  background-color: rgb(226, 146, 146);
+  background-color: rgba(255, 255, 255, 0);
   padding: 12px;
 }
-
 .new-comment-form{
   width: 90%;
-  margin:20px auto;
-  background-color: rgb(1, 171, 184);
+  margin:0px auto 40px auto;
   padding: 12px;
+  display: flex;
+  justify-content: center;
 }
 
 .comment-textarea{
-  height: 70px;
-  padding: 12px;
+  height: 30px;
+  padding: 5px;
   resize: none;
   outline: none;
-  margin-top: 15px;
+  font-size: .85em;
+  width: 80%;
+  color: black;
+  border: none;
+  border-bottom: 2px solid black;
+  transition: .3s ease-in-out;
 }
-.new-comment-form input{
-  margin-bottom: 12px;
+.comment-textarea:hover{
+  border-bottom: 2px solid rgb(0, 169, 221);
 }
+.comment-textarea:focus{
+  border-bottom: 2px solid rgb(0, 169, 221);
+}
+.comment-button{
+  border: none;
+}
+.reply{
+  margin-left: 5px;
+  font-size: 2.1em;
+  cursor: pointer;
+}
+.reply:hover{
+    animation-name: jump-comment;
+    animation-duration: .7s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+.reply:active{
+  transform: scale(.5);
+}
+
 
 .single-comment{
   width: 85%;
   margin: 10px auto;
   padding: 15px;
-  background-color: thistle;
+  background-color: rgb(231, 231, 231);
   border: 1px solid rgba(112, 112, 112, 0.644);
   border-radius: 5px;
 }
@@ -125,5 +192,19 @@ details summary{
 }
 
 .menu-delete-edit:hover{
-  background-color: rgb(109, 135, 252);
+  background-color: rgb(248, 248, 248);
+}
+
+
+
+
+
+
+
+
+/* alll key frames */
+@keyframes jump-comment{
+  50%{
+    transform: translateY(-3px);
+  }
 }
