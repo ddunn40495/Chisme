@@ -95,11 +95,7 @@ class AllPosts extends React.Component {
                         </details>
 
                         <ul className="list-of-comments">
-                            <Comments
-                                onChangeComment={this.props.handleCommentChange}
-                                submitComment={this.props.submitNComment}
-                                postId={post._id}
-                            />
+
                             {
                                 post.comments.map((comment) => {
                                     return <li key={comment._id}
@@ -117,6 +113,11 @@ class AllPosts extends React.Component {
                                 )
                             }
                         </ul>
+                        <Comments
+                            onChangeComment={this.props.handleCommentChange}
+                            submitComment={this.props.submitNComment}
+                            postId={post._id}
+                        />
                     </li>
                 }
                 )}
