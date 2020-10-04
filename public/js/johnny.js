@@ -1,4 +1,5 @@
 
+var socket = io();
 // THIS WILL BE USED TO RENDER ANY PROPERTY ON
 //THE LEFT SIDE OF THE BODY
 class LeftBar extends React.Component {
@@ -90,7 +91,7 @@ class AllPosts extends React.Component {
                                 </form>
                             </details>
                         </details>
-
+                        {/* ==========EDGAR IS WORKING HERE!========== */}
                         <ul className="list-of-comments">
                             <Comments
                                 onChangeComment={this.props.handleCommentChange}
@@ -135,6 +136,7 @@ class PostForm extends React.Component {
         body: "",
         comments: [],
         posts: [],
+        socketId: ""
     }
 
     // THIS WILL BE TRIGGER EVERYTIME THE
@@ -149,6 +151,13 @@ class PostForm extends React.Component {
                 })
             }
         )
+        //========== EDGAR'S SOCKET RECEPTION LINE ==========
+
+        var pid = this.state.socketId // the key of the post id
+        socket.on('chatid', function(msg){
+            // console.log("I am here")
+            $(`[key=${pid}]`).append($('<li class="single-comment">').text(msg));
+        })
     }
 
 
@@ -174,7 +183,11 @@ class PostForm extends React.Component {
     // THE KEY HAS TO MATCH THE PROPERTIES IN
     // STATE SO IT CAN BE SAVED ONCE THE USER
     // CREATES A NEW POST
+    //Edgar's edit, this is also creating new keys for comments even though they don't exist in state
     handleChange = event => {
+        console.log("user is typing...")
+        console.log(event.target.id)
+        console.log(event.target.value)
         this.setState({
             [event.target.id]: event.target.value
         })
@@ -213,15 +226,24 @@ class PostForm extends React.Component {
 
 
     // A FUNCTION THAT WILL CREATE A NEW COMMENT
+    //========== EDGAR'S SOCKET SUBMISSION LINE ==========
     SubmitComment = (event) => {
         event.preventDefault();
+
+        console.log(this.state.text) // edgar testing
+        var msg = this.state.text //the msg being transerred to socket id
+        console.log(msg)
+        socket.emit('test', msg); // socket sending msg
+
         event.currentTarget.reset();
         const id = event.target.id;
         axios.post("/posts/" + id + "/comment", this.state).then(
             (response) => {
+                console.log(response)
                 this.setState({
-                    posts: response.data,
+                    socketId: response.data[response.data.length -1]._id,
                 })
+                console.log(this.state.socketId)
             }
         )
     }

@@ -1,6 +1,7 @@
 // const { set } = require("mongoose");
 
 var socket = io();
+
 class Edgar extends React.Component {
     state = {
       // socket: io()
