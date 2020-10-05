@@ -12,7 +12,17 @@ const expand = (event) => {
 title.on('click', expand);
 
 
-// fixing the button horrible on click color
+// adding functionality to menu button for a post
+const dots = $("button");
+const menuContainer = $(".menu-delete-container");
+console.log(dots)
+// console.log(menuContainer);
+const showHideMenu = (event) => {
+    menuContainer.toggle();
+    console.log("Hellooooo");
+}
+console.log($(".menu-delete-container"))
+// dots.on('click', showHideMenu);
 
 
 

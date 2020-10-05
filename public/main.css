@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Overlock:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Patrick+Hand&display=swap');
 #root{
   margin: 0;
   padding: 0;
@@ -16,25 +16,32 @@
 }
 .middle-bar::-webkit-scrollbar {
   width: 10px;
-  background-color: rgba(60, 148, 248, 0.849);
+  background-color: rgba(20, 46, 78, 0.849);
 }
 .middle-bar::-webkit-scrollbar-thumb {
-background: rgba(146, 14, 14, 0.5);
+background: rgba(158, 158, 158, 0.644);
 border-radius: 5px;
 }
 
 .middle-bar{
   background-color: rgb(253, 253, 253);
-  background-image: url("https://i.pinimg.com/originals/e4/a5/27/e4a527e6f8bfc9ea4eecf4a88c04f86f.jpg");
+  /* background-image: url("https://i.pinimg.com/originals/e4/a5/27/e4a527e6f8bfc9ea4eecf4a88c04f86f.jpg"); */
   /* background-image: url("https://i.pinimg.com/originals/81/5b/ed/815bedb1bad405f763e405eed29dd7f1.jpg"); */
   /* background-image: url("https://papers.co/wallpaper/papers.co-vs22-paint-abstract-background-htc-dark-orange-blue-pattern-36-3840x2400-4k-wallpaper.jpg"); */
   /* background-image: url("https://cdn.northsoundchurch.com/wp-content/uploads/2017/05/29172021/abstract-background-brown-and-blue-circles.jpg"); */
-  
-
-  background-size: cover;
+  /* background-image: url("https://papers.co/wallpaper/papers.co-vs20-paint-abstract-background-htc-pink-blue-pattern-41-iphone-wallpaper.jpg"); */
+  /* background-image: url("https://images.hdqwalls.com/download/geometry-abstract-minimalism-0x-750x1334.jpg"); */
+  /* background-image: url("https://images.pexels.com/photos/924824/pexels-photo-924824.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"); */
+  /* background-image: url("https://images.pexels.com/photos/4279013/pexels-photo-4279013.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"); */
+  /* background-image: url("https://images.pexels.com/photos/2457284/pexels-photo-2457284.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"); */
+  /* background-image: url("https://images.pexels.com/photos/1111369/pexels-photo-1111369.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"); */
+  background-image: url("https://images.pexels.com/photos/1111318/pexels-photo-1111318.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260");
   flex-grow: 1;
   overflow: auto;
   padding: 20px;
+  background-position: center;
+  /* font-family: 'Patrick Hand', cursive; */
+  font-family: 'Overlock', cursive;
 }
 
 
@@ -48,10 +55,10 @@ border-radius: 5px;
 }
 
 .new-post-form {
-  background-color: rgb(253, 253, 253);
+  background-color: rgba(253, 253, 253, 0.973);
   padding: 12px;
   border-radius: 3px;
-  border: 1px solid rgba(0, 0, 0, 0.425);
+  /* border: 1px solid rgba(0, 0, 0, 0.425); */
   font-size: 1em;
 }
 .new-post-form input{
@@ -66,11 +73,11 @@ border-radius: 5px;
   outline: none;
   transition-duration: .2s;
   transition-timing-function: ease-in;
-  border: 2px solid rgba(155, 155, 155, 0.603);
+  border: 1px solid rgba(155, 155, 155, 0.603);
   color: rgba(0, 0, 0, 0.842);
 }
 .new-post-form textarea:focus{
-  border: 2px solid rgba(0, 140, 158, 0.616);
+  border: 1px solid rgba(0, 140, 158, 0.616);
 }
 .new-post-form input:last-of-type{
   background-color: rgb(218, 218, 218);
@@ -85,9 +92,10 @@ border-radius: 5px;
 
 /* ADDING CHANGES TO EACH CREATED POST AND BODY */
 .all-posts-container{
-  /* background-color: rgba(39, 39, 39, 0.808); */
+  background-color: #2c2c3a00;
   padding: 12px;
-  margin-top: 40px;
+  margin-top: 50px;
+  border-radius: 4px;
 }
 
 /* this will render the post for most recent */
@@ -102,14 +110,44 @@ border-radius: 5px;
   background-color: rgb(255, 255, 255);
   padding: 12px;
   margin-bottom: 40px;
+  border-radius: 3px;
+  width: 88%;
+  margin: 10px auto;
 }
 
 .subject-body-container{
   width: 85%;
-  border: 1px solid black;
+  border: 1px solid rgba(145, 145, 145, 0.603);
   margin: 40px auto 0 auto;
   padding: 12px;
-  border-radius: 5px;
+  border-radius: 10px;
+  background-color: rgb(243, 243, 243);
+}
+
+.post-subject{
+  border-bottom: 1px solid rgba(153, 153, 153, 0.507);
+  padding: 5px;
+  color: #2a2a5f;
+  font-weight: 900;
+  font-size: 1.4em;
+}
+
+.short-text-icon{
+  height: 100%;
+  font-size: 1.7em;
+  margin-right: 5px;
+}
+.post-body{
+  /* border: 1px solid gray; */
+  /* border-radius: 3px; */
+  color: #3a3a5e;
+  font-weight: 600;
+  width: 85%;
+  margin: 10px auto;
+  font-size: 1.2em;
+  display: flex;
+  justify-content: flex-start;
+  text-align: left;
 }
 
 
@@ -126,14 +164,15 @@ border-radius: 5px;
 /* ************************************* */
 /* For comments inside the post */
 .list-of-comments{
-  background-color: rgba(255, 255, 255, 0);
-  border: 1px solid rgba(180, 180, 180, 0.411);
+  background-color: rgb(238, 238, 238);
+  /* border: 1px solid rgba(180, 180, 180, 0.411); */
+  /* box-shadow: 1px 1px 1px 1px rgb(207, 207, 207) inset; */
   width: 80%;
   margin: 20px auto;
   display: flex;
   flex-flow: column;
-  justify-items: flex-start;
   padding: 20px 0;
+  border-radius: 10px;
 }
 .new-comment-form{
   width: 90%;
@@ -184,31 +223,131 @@ border-radius: 5px;
 
 .single-comment{
   width: 85%;
-  margin: 5px auto;
-  padding: 5px;
-  background-color: rgb(69, 73, 88);
+  margin: 4px 0 4px 30px;
+  
   color: white;
   border-radius: 5px;
+  /* SEPARATING THE TEXT FROM BUTTONS */
+  display: flex;
+  max-width: 60%;
+  position: relative;
 }
-
-
-
-/* Lets work on the drop down menu for delete and update */
-.menu-delete-edit{
+.display-delete-comment{
+  cursor: pointer;
   position: absolute;
-  top: 5px;
-  right: 5px;
-  background-color: rgba(255, 255, 255, 0.836);
-  padding: 12px;
-  border-radius: 3px;
-  border: 1px solid rgba(131, 131, 131, 0.692);
+  left: -28px;
+  top:5px;
+  color: #8d8d8d;
+  /* background-color: rgb(199, 199, 199); */
+  border-radius: 50%;
+  transition: .2s ease-in-out;
 }
-details summary{
-  outline: none;
+.display-delete-comment:hover{
+  color: #c243d3;
+}
+.trash-comment{
+  cursor: pointer;
+  position: absolute;
+  left: -65px;
+  background-color: teal;
+  color: #2a2a5f;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  transition: .2s ease-in-out;
+}
+.trash-comment:hover{
+  background-color: #23232e;
+  color: #c243d3;
 }
 
-.menu-delete-edit:hover{
-  background-color: rgb(248, 248, 248);
+.comment-text{
+  background-color: rgba(20, 46, 78, 0.849);
+  margin: 0;
+  padding: 7px 15px;
+  border-radius: 10px;
+}
+
+
+
+
+
+
+
+/* =========== post======================= */
+/* Lets work on the drop down menu for delete and update */
+.menu-delete-activate{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+.menu-delete-activate span {
+  font-size: 1.9em;
+  border-radius: 50%;
+  padding: 5px;
+  border: 1px solid transparent;
+  transition: .2s ease-in-out;
+}
+.menu-delete-activate:hover span{
+  background-color:rgb(56, 58, 82);
+  color: rgb(209, 94, 203);
+}
+
+
+/* add some magic to the delete and edit post */
+/* lets target the 3 dots menu to show the edit and delete */
+
+
+.menu-delete-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: teal;
+  width: 101px;
+  height: 50px;
+  border-radius: 3px;
+  position: absolute;
+  top: 1px;
+  right: 50px;
+}
+
+
+
+/* getting rid of the ugly default style for button
+*/
+.menu-delete-container button{
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+/* general stye */
+
+.menu-delete-container span{
+  cursor: pointer;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  transition: .2s ease-in-out;
+
+}
+.menu-delete-container span:hover{
+  color: rgb(218, 71, 223);
+  background-color: rgb(53, 51, 68);
+}
+
+/* LETS HIDE THE EDIT MENU IN THE MEAN TIME
+    AND WORK ONLY WITH THE ICONS FOR DELETE
+      AND EDIT */
+
+
+.edit-post-form{
+  display: none;
 }
 
 
