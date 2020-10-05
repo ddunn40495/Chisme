@@ -25,6 +25,8 @@ $(() => {
             menuContainer.toggle();
             console.log("Hellooooo");
         }
+
+
         for (let dot of dots) {
             console.log(dot);
             $(dot).on("click", showHideMenu);

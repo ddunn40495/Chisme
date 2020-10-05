@@ -73,12 +73,12 @@ class AllPosts extends React.Component {
                             <p className="post-body"><i className="material-icons short-text-icon">short_text</i>{post.body}</p>
                         </div>
 
-                        <div className="menu-delete-activate">
+                        <div className="menu-delete-activate" id={post._id}>
                             <span className="material-icons">
                                 more_horiz
                             </span>
                         </div>
-                        <div className="menu-delete-container">
+                        <div className="menu-delete-container" id={post._id}>
                             <button onClick={this.props.deleteAPost} id={post._id}><span className="material-icons">
                                 delete
                                 </span></button>
