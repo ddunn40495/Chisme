@@ -20,18 +20,20 @@ $(() => {
         // const dots = $("button");
         const menuContainer = $(".menu-delete-container");
         console.log(dots)
-        // console.log(menuContainer);
-        // for (let dot of dots) {
-        //     console.log(dot);
-        //     dot.on("click", showHideMenu);
-        // }
+        console.log(menuContainer);
         const showHideMenu = (event) => {
             menuContainer.toggle();
-            // console.log("Hellooooo");
+            console.log("Hellooooo");
         }
+        for (let dot of dots) {
+            console.log(dot);
+            $(dot).on("click", showHideMenu);
+        }
+
+
         // console.log($(".menu-delete-container"))
-        dots.on('click', showHideMenu);
-    }, 500);
+        // dots.on('click', showHideMenu);
+    }, 1000);
 });
 
 

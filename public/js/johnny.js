@@ -293,7 +293,7 @@ class PostForm extends React.Component {
         // console.log(event.target)
         pid = $(event.target).parent().children().eq(3).attr("id")
         let pid2 = pid
-        console.log($(event.target).parent().children());
+        // console.log($(event.target).parent().children());
 
         console.log(this.state.text) // edgar testing
         var msg = this.state.text //the msg being transerred to socket id
