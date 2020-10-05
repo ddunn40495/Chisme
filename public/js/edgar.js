@@ -15,28 +15,28 @@ class Edgar extends React.Component {
     }
     handleChange= (event) =>{
       this.setState({
-        [event.target.id]: event.target.value
+        // [event.target.id]: event.target.value
       })
     }
     sendMessage = (e) =>{
-      e.preventDefault(); // prevents page reloading
-      socket.emit('test', $('#m').val());
-      e.currentTarget.reset();
+      // e.preventDefault(); // prevents page reloading
+      // socket.emit('test', $('#m').val());
+      // e.currentTarget.reset();
     }
     updateMessage = (nm) =>{
       this.setState({
-        newMessage: nm
+        // newMessage: nm
       })
     }
     render = () => {
       return <div id="edgars-main-div">
-        <div id="messages">
+        {/* <div id="messages">
         {this.state.newMessage}
         </div>
         <form onSubmit={this.sendMessage}>
           <input type="text" id="m" onChange={this.handleChange}/>
           <input type="submit"/>
-        </form>
+        </form> */}
       </div>;
     };
   }
