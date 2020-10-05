@@ -51,6 +51,7 @@ posts.post("/:postId/comment", (req, res) => {
     Comment.create(req.body, (err, createdComment) => {
       foundPost.comments.push(createdComment);
       foundPost.save((err, data) => {
+        // console.log(err)
         res.redirect("/posts");
       });
     });

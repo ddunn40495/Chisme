@@ -1,6 +1,8 @@
 
+var socket = io();
 // THIS WILL BE USED TO RENDER ANY PROPERTY ON
 //THE LEFT SIDE OF THE BODY
+let pid = 0 // the key of the post id
 class LeftBar extends React.Component {
 
     render = () => {
@@ -99,8 +101,32 @@ class AllPosts extends React.Component {
                             </form>
                         </div>
 
+                        <details className="menu-delete-edit">
 
-                        <ul className="list-of-comments">
+                            <summary></summary>
+                            <button onClick={this.props.deleteAPost} id={post._id}>Delete Post</button>
+                            <details>
+                                <summary>Edit Post</summary>
+                                {/* FORM TO EDIT A POST */}
+                                <form className="edit-post-form" onSubmit={this.props.editAPost} id={post._id}>
+                                    {/* INPUT FOR THE SUBJECT */}
+                                    <input
+                                        type="text"
+                                        id="subject"
+                                        defaultValue={post.subject}
+                                        onChange={this.props.handle} />
+                                    {/* INPUT FOR THE BODY */}
+                                    <textarea
+                                        id="body"
+                                        defaultValue={post.body}
+                                        onChange={this.props.handle}></textarea>
+                                    {/* SUBMIT BUTTON TO CREATE A NEW POST*/}
+                                    <input type="submit" value="Edit Post" />
+                                </form>
+                            </details>
+                        </details>
+                        {/* ==========EDGAR IS WORKING HERE!========== */}
+                        <ul className="list-of-comments" id={post._id}>
 
                             {
                                 post.comments.map((comment) => {
@@ -155,6 +181,7 @@ class PostForm extends React.Component {
         body: "",
         comments: [],
         posts: [],
+        socketId: ""
     }
 
     // THIS WILL BE TRIGGER EVERYTIME THE
@@ -169,6 +196,18 @@ class PostForm extends React.Component {
                 })
             }
         )
+        //========== EDGAR'S SOCKET RECEPTION LINE ==========
+        console.log(pid + "THIS BE DA ID")
+        socket.on('chatid', function (stuff) {
+            console.log("I am here pt 2: " + stuff.msg)
+            // console.log($(`ul[id=${stuff.pid2}]`))
+            let myParent = $(`ul[id=${stuff.pid2}]`)
+            let child1 = $('<li class="single-comment">').text(stuff.msg)
+            let button = $("<button>").text("Remove Comment")
+            let child2 = $("<details>").append(button)
+            child1.append(child2)
+            myParent.append(child1);
+        })
     }
 
 
@@ -194,6 +233,7 @@ class PostForm extends React.Component {
     // THE KEY HAS TO MATCH THE PROPERTIES IN
     // STATE SO IT CAN BE SAVED ONCE THE USER
     // CREATES A NEW POST
+    //Edgar's edit, this is also creating new keys for comments even though they don't exist in state
     handleChange = event => {
         this.setState({
             [event.target.id]: event.target.value
@@ -235,17 +275,32 @@ class PostForm extends React.Component {
 
 
     // A FUNCTION THAT WILL CREATE A NEW COMMENT
+    //========== EDGAR'S SOCKET SUBMISSION LINE ==========
     SubmitComment = (event) => {
         event.preventDefault();
+
         event.currentTarget.reset();
         const id = event.target.id;
         axios.post("/posts/" + id + "/comment", this.state).then(
             (response) => {
+                console.log(response)
                 this.setState({
-                    posts: response.data,
+                    socketId: response.data[response.data.length - 1]._id,
                 })
+                pid = this.state.socketId
+                console.log(this.state.socketId)
             }
         )
+
+
+        // console.log(event.target)
+        pid = $(event.target).parent().children().eq(2).attr("id")
+        let pid2 = pid
+
+        console.log(this.state.text) // edgar testing
+        var msg = this.state.text //the msg being transerred to socket id
+        console.log(msg)
+        socket.emit('test', { msg, pid2 }); // socket sending msg + the id of the particular post
     }
 
     // A FUNCTION THAT WILL DELETE A SINGLE COMMENT
