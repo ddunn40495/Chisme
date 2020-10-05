@@ -101,30 +101,30 @@ class AllPosts extends React.Component {
                             </form>
                         </div>
 
-                        <details className="menu-delete-edit">
+                        {/* <details className="menu-delete-edit">
 
                             <summary></summary>
                             <button onClick={this.props.deleteAPost} id={post._id}>Delete Post</button>
                             <details>
-                                <summary>Edit Post</summary>
-                                {/* FORM TO EDIT A POST */}
-                                <form className="edit-post-form" onSubmit={this.props.editAPost} id={post._id}>
-                                    {/* INPUT FOR THE SUBJECT */}
-                                    <input
+                                <summary>Edit Post</summary> */}
+                        {/* FORM TO EDIT A POST */}
+                        {/* <form className="edit-post-form" onSubmit={this.props.editAPost} id={post._id}> */}
+                        {/* INPUT FOR THE SUBJECT */}
+                        {/* <input
                                         type="text"
                                         id="subject"
                                         defaultValue={post.subject}
-                                        onChange={this.props.handle} />
-                                    {/* INPUT FOR THE BODY */}
-                                    <textarea
+                                        onChange={this.props.handle} /> */}
+                        {/* INPUT FOR THE BODY */}
+                        {/* <textarea
                                         id="body"
                                         defaultValue={post.body}
-                                        onChange={this.props.handle}></textarea>
-                                    {/* SUBMIT BUTTON TO CREATE A NEW POST*/}
-                                    <input type="submit" value="Edit Post" />
+                                        onChange={this.props.handle}></textarea> */}
+                        {/* SUBMIT BUTTON TO CREATE A NEW POST*/}
+                        {/* <input type="submit" value="Edit Post" />
                                 </form>
                             </details>
-                        </details>
+                        </details> */}
                         {/* ==========EDGAR IS WORKING HERE!========== */}
                         <ul className="list-of-comments" id={post._id}>
 
@@ -142,7 +142,6 @@ class AllPosts extends React.Component {
                                             id={comment._id}
 
                                             data-postid={post._id}>delete</button>
-
                                     </li>
                                 }
                                 )
@@ -284,18 +283,17 @@ class PostForm extends React.Component {
         axios.post("/posts/" + id + "/comment", this.state).then(
             (response) => {
                 console.log(response)
-                this.setState({
-                    socketId: response.data[response.data.length - 1]._id,
-                })
-                pid = this.state.socketId
-                console.log(this.state.socketId)
+                // this.setState({
+                //     posts: response.data,
+                // })
             }
         )
 
 
         // console.log(event.target)
-        pid = $(event.target).parent().children().eq(2).attr("id")
+        pid = $(event.target).parent().children().eq(3).attr("id")
         let pid2 = pid
+        console.log($(event.target).parent().children());
 
         console.log(this.state.text) // edgar testing
         var msg = this.state.text //the msg being transerred to socket id
