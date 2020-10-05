@@ -25,7 +25,7 @@ border-radius: 5px;
 
 .middle-bar{
   background-color: rgb(253, 253, 253);
-  /* background-image: url("https://i.pinimg.com/originals/e4/a5/27/e4a527e6f8bfc9ea4eecf4a88c04f86f.jpg"); */
+  background-image: url("https://i.pinimg.com/originals/e4/a5/27/e4a527e6f8bfc9ea4eecf4a88c04f86f.jpg");
   /* background-image: url("https://i.pinimg.com/originals/81/5b/ed/815bedb1bad405f763e405eed29dd7f1.jpg"); */
   /* background-image: url("https://papers.co/wallpaper/papers.co-vs22-paint-abstract-background-htc-dark-orange-blue-pattern-36-3840x2400-4k-wallpaper.jpg"); */
   /* background-image: url("https://cdn.northsoundchurch.com/wp-content/uploads/2017/05/29172021/abstract-background-brown-and-blue-circles.jpg"); */
@@ -35,7 +35,7 @@ border-radius: 5px;
   /* background-image: url("https://images.pexels.com/photos/4279013/pexels-photo-4279013.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"); */
   /* background-image: url("https://images.pexels.com/photos/2457284/pexels-photo-2457284.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"); */
   /* background-image: url("https://images.pexels.com/photos/1111369/pexels-photo-1111369.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"); */
-  background-image: url("https://images.pexels.com/photos/1111318/pexels-photo-1111318.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260");
+  /* background-image: url("https://images.pexels.com/photos/1111318/pexels-photo-1111318.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"); */
   flex-grow: 1;
   overflow: auto;
   padding: 20px;

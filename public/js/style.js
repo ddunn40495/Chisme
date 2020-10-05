@@ -13,16 +13,19 @@ title.on('click', expand);
 
 
 // adding functionality to menu button for a post
-const dots = $("button");
-const menuContainer = $(".menu-delete-container");
-console.log(dots)
-// console.log(menuContainer);
-const showHideMenu = (event) => {
-    menuContainer.toggle();
-    console.log("Hellooooo");
-}
-console.log($(".menu-delete-container"))
-// dots.on('click', showHideMenu);
+$(() => {
+    //jQuery code goes here
+    const dots = $("button");
+    const menuContainer = $(".menu-delete-container");
+    console.log(dots)
+    // console.log(menuContainer);
+    const showHideMenu = (event) => {
+        menuContainer.toggle();
+        console.log("Hellooooo");
+    }
+    console.log($(".menu-delete-container"))
+    // dots.on('click', showHideMenu);
+});
 
 
 
