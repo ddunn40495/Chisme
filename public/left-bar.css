@@ -1,5 +1,4 @@
 
-
 .left-main-bar{
     height: 100vh;
     width: 80px;
@@ -66,7 +65,7 @@
     animation-timing-function: ease-out;
     animation-iteration-count: infinite;
 }
-
+ 
 
 @keyframes arrow-moving{
     100%{
@@ -80,25 +79,9 @@
         background: rgb(255, 255, 255);
         
     }
-    /* 
-    25%{
-        background: rgb(56,191,235);
-        background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgb(202, 202, 202) 75%, rgb(0, 0, 0) 100%);
-
-    }
-    */
     50%{
         background-color: rgb(172, 172, 172);
     }
-   /* 
-    75%{
-        background: rgb(56,191,235);
-        background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgb(212, 212, 212) 25%, rgb(0, 0, 0) 100%);
-    }
-    100%{
-        background: rgb(56,191,235);
-        background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgb(174, 175, 175) 0%, rgb(0, 0, 0) 100%);
-    } */
 }
 
 

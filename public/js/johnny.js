@@ -69,8 +69,36 @@ class AllPosts extends React.Component {
                 {this.props.postList.map((post) => {
                     return <li className="single-post" key={post._id}>
                         <div className="subject-body-container">
-                            <h6 className="post-subject">subject: {post.subject}</h6>
-                            <p className="post-body">body: {post.body}</p>
+                            <h6 className="post-subject"> {post.subject}</h6>
+                            <p className="post-body"><i className="material-icons short-text-icon">short_text</i>{post.body}</p>
+                        </div>
+
+                        <div className="menu-delete-activate">
+                            <span className="material-icons">
+                                more_horiz
+                            </span>
+                        </div>
+                        <div className="menu-delete-container">
+                            <button onClick={this.props.deleteAPost} id={post._id}><span className="material-icons">
+                                delete
+                                </span></button>
+                            {/* FORM TO EDIT A POST */}
+                            <span className="material-icons">edit</span>
+                            <form className="edit-post-form" onSubmit={this.props.editAPost} id={post._id}>
+                                {/* INPUT FOR THE SUBJECT */}
+                                <input
+                                    type="text"
+                                    id="subject"
+                                    defaultValue={post.subject}
+                                    onChange={this.props.handle} />
+                                {/* INPUT FOR THE BODY */}
+                                <textarea
+                                    id="body"
+                                    defaultValue={post.body}
+                                    onChange={this.props.handle}></textarea>
+                                {/* SUBMIT BUTTON TO CREATE A NEW POST*/}
+                                <input type="submit" value="Edit Post" />
+                            </form>
                         </div>
 
                         <details className="menu-delete-edit">
@@ -104,15 +132,17 @@ class AllPosts extends React.Component {
                                 post.comments.map((comment) => {
                                     return <li key={comment._id}
                                         className="single-comment">
-                                        {comment.text}
-                                        <details>
-                                            <summary></summary>
-                                            <button
-                                                onClick={this.props.deleteAComment}
-                                                id={comment._id}
+                                        <p className="comment-text">
+                                            {comment.text}
+                                        </p>
+                                        <span className="material-icons display-delete-comment">more_horiz</span>
+                                        <button
+                                            className="material-icons trash-comment"
+                                            onClick={this.props.deleteAComment}
+                                            id={comment._id}
 
-                                                data-postid={post._id}>Remove Comment</button>
-                                        </details>
+                                            data-postid={post._id}>delete</button>
+
                                     </li>
                                 }
                                 )
@@ -168,7 +198,7 @@ class PostForm extends React.Component {
         )
         //========== EDGAR'S SOCKET RECEPTION LINE ==========
         console.log(pid + "THIS BE DA ID")
-        socket.on('chatid', function(stuff){
+        socket.on('chatid', function (stuff) {
             console.log("I am here pt 2: " + stuff.msg)
             // console.log($(`ul[id=${stuff.pid2}]`))
             let myParent = $(`ul[id=${stuff.pid2}]`)
@@ -215,7 +245,9 @@ class PostForm extends React.Component {
     // NEW DATA BACK TO RE-POPULATE THE LIST OF POSTS
     // AND RENDER IT
     deletePost = (event) => {
-        const id = event.target.id;
+        const id = event.currentTarget.id;
+        console.log(id)
+        console.log(event.currentTarget);
         axios.delete("/posts/" + id).then(
             (response) => {
                 this.setState({
@@ -253,7 +285,7 @@ class PostForm extends React.Component {
             (response) => {
                 console.log(response)
                 this.setState({
-                    socketId: response.data[response.data.length -1]._id,
+                    socketId: response.data[response.data.length - 1]._id,
                 })
                 pid = this.state.socketId
                 console.log(this.state.socketId)
@@ -268,7 +300,7 @@ class PostForm extends React.Component {
         console.log(this.state.text) // edgar testing
         var msg = this.state.text //the msg being transerred to socket id
         console.log(msg)
-        socket.emit('test', {msg, pid2}); // socket sending msg + the id of the particular post
+        socket.emit('test', { msg, pid2 }); // socket sending msg + the id of the particular post
     }
 
     // A FUNCTION THAT WILL DELETE A SINGLE COMMENT
