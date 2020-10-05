@@ -43,10 +43,18 @@ const Post = require("../models/post");
 /* ===========
   DELETE ROUTE
   ============= */
-// comments.delete('/:commentId/:postID', (req, res) => {
-//   Comment.findByIdAndRemove(req.params.commentId, (err, deletedComment) => {
-//     Post.findOne({})
-//   })
-// })
+comments.delete("/:commentId", (req, res) => {
+  Comment.findByIdAndRemove(req.params.commentId).then((err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(
+        `This is the comment you just deleted ==================================${data}================================================`
+      );
+    }
+
+    res.redirect("/posts");
+  });
+});
 
 module.exports = comments;
