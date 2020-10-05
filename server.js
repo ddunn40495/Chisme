@@ -5,7 +5,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 const cors = require("cors");
-
+const User = require("./models/user");
+const seeds = require("./models/userSeed");
 //testing socket io
 // var http = require('http').createServer(app);
 // var io = require('socket.io')(http);
@@ -82,6 +83,15 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/index.html");
 });
 
+// app.get("/seeding", (req, res) => {
+//   User.insertMany(seeds, (err, users) => {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       res.send(users);
+//     }
+//   });
+// });
 // app.get("/delete", (req, res) => {
 //   res.redirect("/posts");
 // });
