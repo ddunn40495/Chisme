@@ -13,26 +13,19 @@ title.on('click', expand);
 
 
 // adding functionality to menu button for a post
-$(() => {
-    //jQuery code goes here
-    setTimeout(() => {
-        const dots = $(".menu-delete-activate");
-        // const dots = $("button");
-        const menuContainer = $(".menu-delete-container");
-        console.log(dots)
-        // console.log(menuContainer);
-        // for (let dot of dots) {
-        //     console.log(dot);
-        //     dot.on("click", showHideMenu);
-        // }
-        const showHideMenu = (event) => {
-            menuContainer.toggle();
-            // console.log("Hellooooo");
-        }
-        // console.log($(".menu-delete-container"))
-        dots.on('click', showHideMenu);
-    }, 500);
-});
+// $(() => {
+//     //jQuery code goes here
+//     setTimeout(() => {
+//         const dots = $(".menu-delete-activate");
+//         console.log(dots);
+//         const showHideMenu = (event) => {
+//             const menuContainer = $(`.menu-delete-container[id=${event.currentTarget.id}]`);
+//             menuContainer.toggle();
+//             console.log(event.currentTarget.id);
+//         }
+//         dots.on('click', showHideMenu);
+//     }, 1000);
+// });
 
 
 
