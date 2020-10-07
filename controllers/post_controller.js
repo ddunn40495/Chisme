@@ -196,6 +196,27 @@ DELETE ROUTE
 //   });
 // });
 
+posts.delete("/comment/:commentId", (req, res) => {
+  Comment.findByIdAndRemove(req.params.commentId).then((err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(
+        `This is the comment you just deleted ==================================${data}================================================`
+      );
+      Post.find({})
+        .sort({ createdAt: 1 })
+        .populate({ path: "comments", populate: { path: "postedBy" } })
+        .exec((err, posts) => {
+          if (err) {
+            console.log(err);
+          }
+          res.json(posts);
+        });
+    }
+  });
+});
+
 /* ===========
 DELETE ROUTE
 ============= */

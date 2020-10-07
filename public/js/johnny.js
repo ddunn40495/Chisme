@@ -306,10 +306,10 @@ class PostForm extends React.Component {
     const id = event.target.id;
     const postId = event.target.getAttribute("data-postid");
     console.log(`${id} + ${postId}`);
-    axios.delete(`/posts/${id}/comment/${postId}`).then((response) => {
+    axios.delete("/posts/comment/" + id).then((response) => {
       // this.setState({
-      //     posts: response.data
-      // })
+      //   posts: response.data,
+      // });
       console.log(response);
     });
   };
