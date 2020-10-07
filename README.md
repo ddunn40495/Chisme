@@ -1,6 +1,6 @@
 # Chisme
 
-https://chisme-proj.herokuapp.com/
+[Chisme App](https://chisme-proj.herokuapp.com/)
 
     **An app to add a post and comment on the post in real time!!**
     this is a full stack application using the **MERN**
@@ -36,10 +36,10 @@ https://chisme-proj.herokuapp.com/
 
 
     ##previous live app
-    ![previous1](/project-images/previous-live-app.png)
-    ![previous2](/project-images/previous-live-app-post.png)
+![previous1](/project-images/previous-live-app.png)
+![previous2](/project-images/previous-live-app-post.png)
 
     ##Currently live app
-    ![current1](/project-images/current-live-app.png)
-    ![current1](/project-images/current-live-app2.png)
-    ![current1](/project-images/current-live-app-post.png)
+![current1](/project-images/current-live-app.png)
+![current1](/project-images/current-live-app2.png)
+![current1](/project-images/current-live-app-post.png)
