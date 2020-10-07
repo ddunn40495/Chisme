@@ -89,11 +89,42 @@ posts.get("/", (req, res) => {
 PUT ROUTE
 ============= */
 //UPDATE POST
-posts.put("/:postId", (req, res) => {
+// posts.put("/:postId", (req, res) => {
+//   Post.findByIdAndUpdate(
+//     req.params.postId,
+//     req.body,
+//     { new: true },
+//     (error, updatedPost) => {
+//       console.log(
+//         `This is the post you just updated ==================================${updatedPost}================================================`
+//       );
+//       if (error) {
+//         res.send(error);
+//       } else {
+//         Post.find({})
+//           .sort({ createdAt: 1 })
+//           .populate({ path: "comments", populate: { path: "postedBy" } })
+//           .exec((err, posts) => {
+//             if (err) {
+//               console.log(err);
+//             }
+//             res.json(posts);
+//           });
+//       }
+//     }
+//   );
+// });
+
+/* ===========
+PATCH ROUTE
+============= */
+//UPDATE POST
+posts.patch("/:postId", (req, res) => {
+  console.log(req.body);
   Post.findByIdAndUpdate(
     req.params.postId,
     req.body,
-    { new: true },
+    { new: true, omitUndefined: false },
     (error, updatedPost) => {
       console.log(
         `This is the post you just updated ==================================${updatedPost}================================================`
@@ -131,8 +162,7 @@ posts.put("/:postId/comment/:commentId", (req, res) => {
       if (error) {
         res.send(error);
       } else {
-        res.json(updatedComment)
-
+        res.json(updatedComment);
       }
     }
   );
@@ -143,19 +173,28 @@ DELETE ROUTE
 ============= */
 //DELETE COMMENT
 
-posts.delete("/:postId/comment/:commentId", (req, res) => {
-  Comment.findByIdAndRemove(req.params.commentId).then((err, data) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(
-        `This is the comment you just deleted ==================================${data}================================================`
-      );
-    }
+// posts.delete("/:postId/comment/:commentId", (req, res) => {
+//   console.log(req.params);
+// });
 
-    res.redirect("/posts");
-  });
-});
+// /* ===========
+// DELETE ROUTE
+// ============= */
+// //DELETE COMMENT
+
+// posts.delete("/:postId/comment/:commentId", (req, res) => {
+//   Comment.findByIdAndRemove(req.params.commentId).then((err, data) => {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       console.log(
+//         `This is the comment you just deleted ==================================${data}================================================`
+//       );
+//     }
+
+//     res.redirect("/posts");
+//   });
+// });
 
 /* ===========
 DELETE ROUTE
