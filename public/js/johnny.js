@@ -147,6 +147,28 @@ class RightBar extends React.Component {
         return (
             <div className='right-main-bar'>
                 <h1>Right Bar</h1>
+                <div className="info-container">
+                    <div className="info-1">
+                        <a href="/"><i className="fab fa-facebook"></i></a>
+                        <a href="/"><i className="fab fa-twitter"></i>
+                        </a>
+                        <a href="/"><i className="fab fa-instagram"></i></a>
+
+                    </div>
+                    <div className="info-2">
+                        <a href="">Contact Us</a>
+                        <a href="">How To Use</a>
+                        <a href="">About Us</a>
+                    </div>
+                    <div className="team">
+                        <h6>Team Project by:</h6>
+                        <ul>
+                            <li>Daniel</li>
+                            <li>Edgar</li>
+                            <li>Johnny</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         );
     };
