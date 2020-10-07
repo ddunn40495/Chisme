@@ -328,11 +328,14 @@ class PostForm extends React.Component {
             console.log("I am here pt 2: " + stuff.msg);
             // console.log($(`ul[id=${stuff.pid2}]`))
             let myParent = $(`ul[id=${stuff.pid2}]`);
-            let child1 = $('<li class="single-comment">').text(stuff.msg);
-            let button = $("<button>").text("Remove Comment");
-            let child2 = $("<details>").append(button);
-            child1.append(child2);
-            myParent.append(child1);
+            let myLi = $('<li class="single-comment">')
+            let myText = $("<p class='comment-text'>").text(stuff.msg);
+            let mySpan = $("<span class='material-icons display-delete-comment'").text("more_horiz")
+            // let button = $("<button class='material-icons trash-comment'>").text("delete");
+            // let child2 = $("<details>").append(button);
+            // child1.append(child2);
+            myLi.append(myText)
+            myParent.append(myLi);
         });
         runEventListeners();
     };
