@@ -408,12 +408,12 @@ class PostForm extends React.Component {
         event.currentTarget.reset();
         const id = event.target.id;
         axios.post("/posts/" + id + "/comment", this.state).then((response) => {
-            console.log(response);
+            // console.log(response);
             this.setState({
                 socketId: response.data[response.data.length - 1]._id,
             });
             pid = this.state.socketId;
-            console.log(this.state.socketId);
+            // console.log(this.state.socketId);
         });
 
         // console.log(event.target)
@@ -437,7 +437,7 @@ class PostForm extends React.Component {
             this.setState({
                 posts: response.data,
             });
-            console.log(response);
+            // console.log(response);
         });
     };
     // CREATING THE FORM TO BE RENDERED IN THE INDEX

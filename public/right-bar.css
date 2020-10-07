@@ -21,6 +21,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    z-index: 2;
 }
 
 .project-logo{
@@ -40,7 +41,7 @@
 .project-name{
     color: rgb(52, 48, 61);
     font-size: 3.3em;
-    transform: rotate(-45deg) translateX(-10px);
+    transform: rotate(-45deg) translateX(-14px);
 }
 .info-container{
     /* background-color: blanchedalmond; */

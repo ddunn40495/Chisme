@@ -16,6 +16,7 @@
     padding: 12px;
     transition-duration: .2s;
     transition-timing-function: linear;
+    z-index: 2;
 }
 
 .test-title{

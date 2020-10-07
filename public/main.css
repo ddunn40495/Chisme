@@ -131,14 +131,14 @@
   padding: 5px;
   color: #2a2a5f;
   font-weight: 900;
-  font-size: 1.4em;
+  font-size: 1.1em;
   word-wrap: break-word;
   overflow: auto;
 }
 
 .short-text-icon {
   height: 100%;
-  font-size: 1.7em;
+  font-size: 1.1em;
   margin-right: 5px;
 }
 .post-body {
@@ -148,7 +148,7 @@
   font-weight: 600;
   width: 85%;
   margin: 10px auto;
-  font-size: 1.2em;
+  font-size: 1em;
   display: flex;
   justify-content: flex-start;
   text-align: left;
@@ -338,17 +338,35 @@
 .edit-post-form {
   display: none;
   position: absolute;
-  background-color: rgb(66, 66, 66);
+  background-color: rgb(68, 59, 82);
   color: white;
-  right: 55px;
-  top: 30px;
-  width: 450px;
+  right: 50px;
+  top: 1px;
+  min-width: 350px;
+  width: 20vw;
   height: 200px;
   z-index: 1;
   padding: 20px;
+  border-radius: 7px;
+}
+.edit-post-form input{
+  padding: 12px;
+  color: #dbdbdb;
 }
 .edit-post-form textarea{
   resize: none;
+  color: #dddddd;
+  padding: 12px;
+}
+.edit-post-form :last-child{
+  background-color: teal;
+  color: #2b2b3b;
+  border: none;
+  border-radius: 5px;
+}
+.edit-post-form :last-child:hover{
+  background-color: #2d2d3b;
+  color: #a139af;
 }
 
 /* alll key frames */
