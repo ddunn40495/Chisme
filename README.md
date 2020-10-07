@@ -1,9 +1,9 @@
 # Chisme
 
-[Chisme App](https://chisme-proj.herokuapp.com/)
+[Chisme App](https://chisme-proj.herokuapp.com/) <-Live App Link
 
-    **An app to add a post and comment on the post in real time!!**
-    this is a full stack application using the **MERN**
+ **An app to add a post and comment on the post in real time!!**
+ this is a full stack application using the **MERN**
 
 ##Technologies Used
 -**MERN**: Node.js, Mongoose, Express, and React
