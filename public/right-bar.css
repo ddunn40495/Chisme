@@ -1,5 +1,5 @@
 
-
+@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
 .right-main-bar{
     position: sticky;
     /* background-color: rgb(243, 243, 243); */
@@ -10,6 +10,7 @@
 
 
     width: 200px;
+    min-width: 200px;
     top: 0;
     right: 0;
     bottom: 0;
@@ -17,4 +18,101 @@
     border-left: 1px solid rgba(97, 97, 97, 0.575);
     box-shadow: 1px 1px 5px 2px black;
     padding: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.project-logo{
+    font-family: 'Shadows Into Light', cursive;
+    background-color: indigo;
+    background-image: url("https://images.pexels.com/photos/1111369/pexels-photo-1111369.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+    height: 150px;
+    text-align: center;
+    background-size: 450px;
+    background-repeat: no-repeat;
+    background-position: -37px -75px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px white;
+    filter: grayscale(35%);
+    min-height: 150px;
+}
+.project-name{
+    color: rgb(52, 48, 61);
+    font-size: 3.3em;
+    transform: rotate(-45deg) translateX(-10px);
+}
+.info-container{
+    /* background-color: blanchedalmond; */
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+}
+
+/* FIRST CHILD OF INFO CONTAINER */
+.info-1{
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid rgba(151, 151, 151, 0.658);
+    padding: 10px 2px;
+}
+.info-1 a{
+    margin: 0 5px;
+}
+.info-1 a i{
+    font-size: 1.5em;
+    color: rgb(161, 168, 190);
+    cursor: pointer;
+}
+.info-1 a i:hover{
+    color: hotpink;
+}
+
+/* SECOND CHILD OF .info-container */
+.info-2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 2px;
+    border-bottom: 1px solid rgba(184, 184, 184, 0.747);
+}
+.info-2 a{
+    color: rgb(161, 168, 190);
+    cursor: pointer;
+}
+.info-2 a:hover{
+    color: hotpink;
+}
+
+/* THIRD CHILD OF INFO CONTAINER */
+.team {
+    display: flex;
+    flex-direction: column;
+}
+.team h6{
+    cursor: pointer;
+}
+.team h6:hover + ul li a{
+    color:rgb(230, 93, 161);
+}
+.team ul{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.contributor a{
+    cursor: pointer;
+    color: rgb(161, 168, 190);
+    padding: 2px;
+}
+.contributor:hover a{
+    color: hotpink;
+}
+
+.contributor a i{
+    margin: 0 5px 0 0;
 }

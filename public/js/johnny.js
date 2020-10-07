@@ -146,7 +146,9 @@ class RightBar extends React.Component {
     render = () => {
         return (
             <div className='right-main-bar'>
-                <h1>Right Bar</h1>
+                <div className="project-logo">
+                    <h1 className="project-name">CHISME</h1>
+                </div>
                 <div className="info-container">
                     <div className="info-1">
                         <a href="/"><i className="fab fa-facebook"></i></a>
@@ -156,16 +158,31 @@ class RightBar extends React.Component {
 
                     </div>
                     <div className="info-2">
-                        <a href="">Contact Us</a>
-                        <a href="">How To Use</a>
-                        <a href="">About Us</a>
+                        <a href="/">Contact Us</a>
+                        <a href="/">How To Use</a>
+                        <a href="/">About Us</a>
                     </div>
                     <div className="team">
                         <h6>Team Project by:</h6>
                         <ul>
-                            <li>Daniel</li>
-                            <li>Edgar</li>
-                            <li>Johnny</li>
+                            <li className="contributor">
+                                <a>
+                                    <i class="fab fa-linkedin"></i>
+                                Daniel
+                                </a>
+                            </li>
+                            <li className="contributor">
+                                <a>
+                                    <i class="fab fa-linkedin"></i>
+                                Edgar
+                                </a>
+                            </li>
+                            <li className="contributor">
+                                <a>
+                                    <i class="fab fa-linkedin"></i>
+                                Johnny
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -212,7 +229,7 @@ class AllPosts extends React.Component {
                     return <li className="single-post" key={post._id}>
                         <div className="subject-body-container">
                             <h6 className="post-subject"> {post.subject}</h6>
-                            <p className="post-body"><i className="material-icons short-text-icon">short_text</i>{post.body}</p>
+                            <p className="post-body"> {post.body}</p>
                         </div>
 
                         <div className="menu-delete-activate" id={post._id}>
