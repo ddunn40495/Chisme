@@ -11,6 +11,17 @@ const expand = (event) => {
 
 title.on('click', expand);
 
+const authButtons = $(".auth-button");
+
+const sendMessage = (event) => {
+    alert("This is currently under development\n" +
+        "\t Thank you for your patience");
+}
+
+for (let button of authButtons) {
+    $(button).on("click", sendMessage);
+}
+
 
 // adding functionality to menu button for a post
 // $(() => {

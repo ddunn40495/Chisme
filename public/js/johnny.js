@@ -20,28 +20,28 @@ const runEventListeners = () => {
             $(document).mouseup((e) => {
                 if (currentMenu) {
                     // let id = $(currentMenu).attr("id");
-                    console.log(e.target);
+                    // console.log(e.target);
                     // console.log(id);
                     let insideDiv = false
                     if ($(currentMenu).children().eq(1)[0] === e.target) {
-                        console.log("this checks");
+                        // console.log("this checks");
                         insideDiv = true;
                     }
                     if ($(currentMenu).children().eq(2)[0] === e.target) {
-                        console.log("this checks");
+                        // console.log("this checks");
                         insideDiv = true;
                     }
                     if ($(currentMenu).children().eq(2).children().eq(0)[0] === e.target) {
-                        console.log("works kid");
+                        // console.log("works kid");
                         insideDiv = true;
                     }
                     if ($(currentMenu).children().eq(2).children().eq(1)[0] === e.target) {
-                        console.log("works kid");
+                        // console.log("works kid");
                         insideDiv = true;
                     }
 
                     if (insideDiv === false) {
-                        console.log("no longer there");
+                        // console.log("no longer there");
                         for (let menu of menuDots) {
                             $(menu).hide();
                         }
@@ -58,8 +58,8 @@ const runEventListeners = () => {
 
             $(document).mouseup((e) => {
                 if (showTrashButton) {
-                    console.log(showTrashButton);
-                    console.log(e.target)
+                    // console.log(showTrashButton);
+                    // console.log(e.target)
                     if (e.target !== showTrashButton) {
                         $(showTrashButton).hide();
                     }
@@ -81,31 +81,31 @@ const runEventListeners = () => {
                 editPostDisplay = editForm;
 
                 menuContainer.show();
-                console.log(event.currentTarget.id);
+                // console.log(event.currentTarget.id);
 
                 editBtn.on("click", (editEvent) => {
                     editForm.show();
-                    console.log("clicked edit button");
+                    // console.log("clicked edit button");
                 }
                 )
 
             }
 
             let showDeleteOption = (event) => {
-                console.log("time to delete");
+                // console.log("time to delete");
                 // for (let button1 of buttonDeleteComments) {
                 //     $(button1).hide();
                 // }
                 const buttonShow = $(`.trash-comment[id=${event.target.id}]`);
-                console.log(buttonShow.css("display"));
+                // console.log(buttonShow.css("display"));
                 showTrashButton = buttonShow[0];
 
                 if (buttonShow.css("display") == "none") {
                     buttonShow.show();
-                    console.log("here one");
+                    // console.log("here one");
                 } else {
                     buttonShow.hide();
-                    console.log("here3");
+                    // console.log("here3");
                 }
 
             }
@@ -118,8 +118,6 @@ const runEventListeners = () => {
             }
 
             //  FUNCTIONT THAT WILL SHOW THE EDIT FORM
-
-
 
         }, 1000)
     });
@@ -146,7 +144,46 @@ class RightBar extends React.Component {
     render = () => {
         return (
             <div className='right-main-bar'>
-                <h1>Right Bar</h1>
+                <div className="project-logo">
+                    <h1 className="project-name">CHISME</h1>
+                </div>
+                <div className="info-container">
+                    <div className="info-1">
+                        <a href="/"><i className="fab fa-facebook"></i></a>
+                        <a href="/"><i className="fab fa-twitter"></i>
+                        </a>
+                        <a href="/"><i className="fab fa-instagram"></i></a>
+
+                    </div>
+                    <div className="info-2">
+                        <a href="/">Contact Us</a>
+                        <a href="/">How To Use</a>
+                        <a href="/">About Us</a>
+                    </div>
+                    <div className="team">
+                        <h6>Team Project by:</h6>
+                        <ul>
+                            <li className="contributor">
+                                <a href="https://www.linkedin.com/in/daniel-dunn-b733501b8/" target="_blank" rel="noopener noreferrer">
+                                    <i className="fab fa-linkedin"></i>
+                                Daniel
+                                </a>
+                            </li>
+                            <li className="contributor">
+                                <a href="https://www.linkedin.com/in/edgar-galvan-cuesta-476740110/" target="_blank" rel="noopener noreferrer">
+                                    <i className="fab fa-linkedin"></i>
+                                Edgar
+                                </a>
+                            </li>
+                            <li className="contributor">
+                                <a href="https://www.linkedin.com/in/johnny-huinac-15842b112/" target="_blank" rel="noopener noreferrer">
+                                    <i className="fab fa-linkedin"></i>
+                                Johnny
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         );
     };
@@ -190,7 +227,7 @@ class AllPosts extends React.Component {
                     return <li className="single-post" key={post._id}>
                         <div className="subject-body-container">
                             <h6 className="post-subject"> {post.subject}</h6>
-                            <p className="post-body"><i className="material-icons short-text-icon">short_text</i>{post.body}</p>
+                            <p className="post-body"> {post.body}</p>
                         </div>
 
                         <div className="menu-delete-activate" id={post._id}>
@@ -293,7 +330,7 @@ class PostForm extends React.Component {
             let myParent = $(`ul[id=${stuff.pid2}]`);
             let myLi = $('<li class="single-comment">')
             let myText = $("<p class='comment-text'>").text(stuff.msg);
-            let mySpan = $("<span class='material-icons display-delete-comment'").text("more_horiz")
+            let mySpan = $("<span class='material-icons display-delete-comment'>").text("more_horiz")
             // let button = $("<button class='material-icons trash-comment'>").text("delete");
             // let child2 = $("<details>").append(button);
             // child1.append(child2);
@@ -374,12 +411,12 @@ class PostForm extends React.Component {
         event.currentTarget.reset();
         const id = event.target.id;
         axios.post("/posts/" + id + "/comment", this.state).then((response) => {
-            console.log(response);
+            // console.log(response);
             this.setState({
                 socketId: response.data[response.data.length - 1]._id,
             });
             pid = this.state.socketId;
-            console.log(this.state.socketId);
+            // console.log(this.state.socketId);
         });
 
         // console.log(event.target)
@@ -394,18 +431,18 @@ class PostForm extends React.Component {
     };
 
     // A FUNCTION THAT WILL DELETE A SINGLE COMMENT
-   deleteComment = (event) => {
-    console.log(event.target);
-    const id = event.target.id;
-    const postId = event.target.getAttribute("data-postid");
-    console.log(`${id} + ${postId}`);
-    axios.delete("/posts/comment/" + id).then((response) => {
-      // this.setState({
-      //   posts: response.data,
-      // });
-      console.log(response);
-    });
-  };
+    deleteComment = (event) => {
+        console.log(event.target);
+        const id = event.target.id;
+        const postId = event.target.getAttribute("data-postid");
+        console.log(`${id} + ${postId}`);
+        axios.delete("/posts/comment/" + id).then((response) => {
+            this.setState({
+                posts: response.data,
+            });
+            // console.log(response);
+        });
+    };
     // CREATING THE FORM TO BE RENDERED IN THE INDEX
     // AND ADDING THE FUNCTIONS ABOVE
     render = () => {
