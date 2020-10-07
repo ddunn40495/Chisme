@@ -314,7 +314,6 @@ class PostForm extends React.Component {
         posts: [],
         socketId: "",
     };
-
     // THIS WILL BE TRIGGER EVERYTIME THE
     // PAGE LOADS AND WILL HELP TO POPULATE
     // THE POSTS IN AN ARRAY FOR LATER TO BE
@@ -431,19 +430,18 @@ class PostForm extends React.Component {
     };
 
     // A FUNCTION THAT WILL DELETE A SINGLE COMMENT
-    deleteComment = (event) => {
-        console.log(event.target);
-        const id = event.target.id;
-        const postId = event.target.getAttribute("data-postid");
-        console.log(`${id} + ${postId}`);
-        axios.delete(`/posts/${id}/comment/${postId}`).then((response) => {
-            // this.setState({
-            //     posts: response.data
-            // })
-            console.log(response);
-        });
-    };
-
+   deleteComment = (event) => {
+    console.log(event.target);
+    const id = event.target.id;
+    const postId = event.target.getAttribute("data-postid");
+    console.log(`${id} + ${postId}`);
+    axios.delete("/posts/comment/" + id).then((response) => {
+      // this.setState({
+      //   posts: response.data,
+      // });
+      console.log(response);
+    });
+  };
     // CREATING THE FORM TO BE RENDERED IN THE INDEX
     // AND ADDING THE FUNCTIONS ABOVE
     render = () => {
