@@ -92,6 +92,7 @@
 }
 .team h6{
     cursor: pointer;
+    text-align: center;
 }
 .team h6:hover + ul li a{
     color:rgb(230, 93, 161);

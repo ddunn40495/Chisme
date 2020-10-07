@@ -20,28 +20,28 @@ const runEventListeners = () => {
             $(document).mouseup((e) => {
                 if (currentMenu) {
                     // let id = $(currentMenu).attr("id");
-                    console.log(e.target);
+                    // console.log(e.target);
                     // console.log(id);
                     let insideDiv = false
                     if ($(currentMenu).children().eq(1)[0] === e.target) {
-                        console.log("this checks");
+                        // console.log("this checks");
                         insideDiv = true;
                     }
                     if ($(currentMenu).children().eq(2)[0] === e.target) {
-                        console.log("this checks");
+                        // console.log("this checks");
                         insideDiv = true;
                     }
                     if ($(currentMenu).children().eq(2).children().eq(0)[0] === e.target) {
-                        console.log("works kid");
+                        // console.log("works kid");
                         insideDiv = true;
                     }
                     if ($(currentMenu).children().eq(2).children().eq(1)[0] === e.target) {
-                        console.log("works kid");
+                        // console.log("works kid");
                         insideDiv = true;
                     }
 
                     if (insideDiv === false) {
-                        console.log("no longer there");
+                        // console.log("no longer there");
                         for (let menu of menuDots) {
                             $(menu).hide();
                         }
@@ -58,8 +58,8 @@ const runEventListeners = () => {
 
             $(document).mouseup((e) => {
                 if (showTrashButton) {
-                    console.log(showTrashButton);
-                    console.log(e.target)
+                    // console.log(showTrashButton);
+                    // console.log(e.target)
                     if (e.target !== showTrashButton) {
                         $(showTrashButton).hide();
                     }
@@ -81,31 +81,31 @@ const runEventListeners = () => {
                 editPostDisplay = editForm;
 
                 menuContainer.show();
-                console.log(event.currentTarget.id);
+                // console.log(event.currentTarget.id);
 
                 editBtn.on("click", (editEvent) => {
                     editForm.show();
-                    console.log("clicked edit button");
+                    // console.log("clicked edit button");
                 }
                 )
 
             }
 
             let showDeleteOption = (event) => {
-                console.log("time to delete");
+                // console.log("time to delete");
                 // for (let button1 of buttonDeleteComments) {
                 //     $(button1).hide();
                 // }
                 const buttonShow = $(`.trash-comment[id=${event.target.id}]`);
-                console.log(buttonShow.css("display"));
+                // console.log(buttonShow.css("display"));
                 showTrashButton = buttonShow[0];
 
                 if (buttonShow.css("display") == "none") {
                     buttonShow.show();
-                    console.log("here one");
+                    // console.log("here one");
                 } else {
                     buttonShow.hide();
-                    console.log("here3");
+                    // console.log("here3");
                 }
 
             }
@@ -118,8 +118,6 @@ const runEventListeners = () => {
             }
 
             //  FUNCTIONT THAT WILL SHOW THE EDIT FORM
-
-
 
         }, 1000)
     });
@@ -167,19 +165,19 @@ class RightBar extends React.Component {
                         <ul>
                             <li className="contributor">
                                 <a>
-                                    <i class="fab fa-linkedin"></i>
+                                    <i className="fab fa-linkedin"></i>
                                 Daniel
                                 </a>
                             </li>
                             <li className="contributor">
                                 <a>
-                                    <i class="fab fa-linkedin"></i>
+                                    <i className="fab fa-linkedin"></i>
                                 Edgar
                                 </a>
                             </li>
                             <li className="contributor">
                                 <a>
-                                    <i class="fab fa-linkedin"></i>
+                                    <i className="fab fa-linkedin"></i>
                                 Johnny
                                 </a>
                             </li>
@@ -430,18 +428,18 @@ class PostForm extends React.Component {
     };
 
     // A FUNCTION THAT WILL DELETE A SINGLE COMMENT
-   deleteComment = (event) => {
-    console.log(event.target);
-    const id = event.target.id;
-    const postId = event.target.getAttribute("data-postid");
-    console.log(`${id} + ${postId}`);
-    axios.delete("/posts/comment/" + id).then((response) => {
-      // this.setState({
-      //   posts: response.data,
-      // });
-      console.log(response);
-    });
-  };
+    deleteComment = (event) => {
+        console.log(event.target);
+        const id = event.target.id;
+        const postId = event.target.getAttribute("data-postid");
+        console.log(`${id} + ${postId}`);
+        axios.delete("/posts/comment/" + id).then((response) => {
+            this.setState({
+                posts: response.data,
+            });
+            console.log(response);
+        });
+    };
     // CREATING THE FORM TO BE RENDERED IN THE INDEX
     // AND ADDING THE FUNCTIONS ABOVE
     render = () => {

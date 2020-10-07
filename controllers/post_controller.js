@@ -197,13 +197,11 @@ DELETE ROUTE
 // });
 
 posts.delete("/comment/:commentId", (req, res) => {
+  console.log("here 1");
   Comment.findByIdAndRemove(req.params.commentId).then((err, data) => {
     if (err) {
+      console.log("error?");
       console.log(err);
-    } else {
-      console.log(
-        `This is the comment you just deleted ==================================${data}================================================`
-      );
       Post.find({})
         .sort({ createdAt: 1 })
         .populate({ path: "comments", populate: { path: "postedBy" } })
@@ -213,6 +211,30 @@ posts.delete("/comment/:commentId", (req, res) => {
           }
           res.json(posts);
         });
+    } else {
+      console.log("hello 2");
+      console.log(
+        `This is the comment you just deleted ==================================${data}================================================`
+      );
+      // Post.find({})
+      //   .sort({ createdAt: 1 })
+      //   .populate({ path: "comments", populate: { path: "postedBy" } })
+      //   .exec((err, posts) => {
+      //     if (err) {
+      //       console.log(err);
+      //     }
+      //     res.json(posts);
+      //   });
+      // Post.findById(req.params.postId, (err, foundPost) => {
+      //   Comment.create(req.body, (err, createdComment) => {
+      //     foundPost.comments.push(createdComment);
+      //     foundPost.save((err, data) => {
+      //       // console.log(err)
+      //       res.redirect("/posts");
+      //     });
+      //   });
+      // });
+      // res.redirect("/posts");
     }
   });
 });
