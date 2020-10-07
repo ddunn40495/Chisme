@@ -8,7 +8,6 @@
     /* text-orientation: mixed;
     writing-mode: vertical-lr; */
 
-
     width: 200px;
     min-width: 200px;
     top: 0;
@@ -17,7 +16,7 @@
     height: 100vh;
     border-left: 1px solid rgba(97, 97, 97, 0.575);
     box-shadow: 1px 1px 5px 2px black;
-    padding: 12px;
+    padding: 0 12px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -26,6 +25,7 @@
 
 .project-logo{
     font-family: 'Shadows Into Light', cursive;
+    margin-top: 10px;
     background-color: indigo;
     background-image: url("https://images.pexels.com/photos/1111369/pexels-photo-1111369.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
     height: 150px;

@@ -164,19 +164,19 @@ class RightBar extends React.Component {
                         <h6>Team Project by:</h6>
                         <ul>
                             <li className="contributor">
-                                <a>
+                                <a href="https://www.linkedin.com/in/daniel-dunn-b733501b8/" target="_blank" rel="noopener noreferrer">
                                     <i className="fab fa-linkedin"></i>
                                 Daniel
                                 </a>
                             </li>
                             <li className="contributor">
-                                <a>
+                                <a href="https://www.linkedin.com/in/edgar-galvan-cuesta-476740110/" target="_blank" rel="noopener noreferrer">
                                     <i className="fab fa-linkedin"></i>
                                 Edgar
                                 </a>
                             </li>
                             <li className="contributor">
-                                <a>
+                                <a href="https://www.linkedin.com/in/johnny-huinac-15842b112/" target="_blank" rel="noopener noreferrer">
                                     <i className="fab fa-linkedin"></i>
                                 Johnny
                                 </a>
@@ -330,7 +330,7 @@ class PostForm extends React.Component {
             let myParent = $(`ul[id=${stuff.pid2}]`);
             let myLi = $('<li class="single-comment">')
             let myText = $("<p class='comment-text'>").text(stuff.msg);
-            let mySpan = $("<span class='material-icons display-delete-comment'").text("more_horiz")
+            let mySpan = $("<span class='material-icons display-delete-comment'>").text("more_horiz")
             // let button = $("<button class='material-icons trash-comment'>").text("delete");
             // let child2 = $("<details>").append(button);
             // child1.append(child2);
